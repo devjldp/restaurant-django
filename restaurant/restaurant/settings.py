@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load the environment variables
 env = Env()
-env.read_env(os.path.join(BASE_DIR,'.env'))
+env.read_env(BASE_DIR/'.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -44,8 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # Allauth Apps
+    'allauth',
+    'allauth.account',
+    # if you installed social accounts => allauth.socialaccounts
 ]
 
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +60,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Allouth settings:
+ACCOUNT_LOGIN_METHOD = ['username','email']
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
+ACCOUNT_EMAIL_VERIFICATION ="mandatory"
+ACCOUNT_USERNAME_MIN_LENGTH = 4
 
 ROOT_URLCONF = 'restaurant.urls'
 
@@ -68,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # allauth requires from django
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -84,9 +102,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env.str("DB_NAME"),
         'USER': env.str("DB_USER"),
-        'PASSWORD': env.int("DB_PASSWORD"),
+        'PASSWORD': env.str("DB_PASSWORD"),
         'HOST': env.str("DB_HOST", "localhost"),
-        'PORT': env.int("DB_PORT", 5432)
+        'PORT': env.str("DB_PORT", 5432)
 
     }
 }
