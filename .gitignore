@@ -1,3 +1,9 @@
 venv/
 
 restaurant/.env
+
+# Pycache files
+__pycache__/
+*.pyd
+*.pyo
+*.pyc
