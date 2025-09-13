@@ -7,3 +7,5 @@ __pycache__/
 *.pyd
 *.pyo
 *.pyc
+
+restaurant/__pycache__/
