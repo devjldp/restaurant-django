@@ -75,7 +75,7 @@ AUTHENTICATION_BACKENDS = [
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Allouth settings:
-ACCOUNT_LOGIN_METHODS = {'username','email'}
+ACCOUNT_LOGIN_METHODS = ['username','email']
 ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION ="mandatory"
 ACCOUNT_USERNAME_MIN_LENGTH = 4
