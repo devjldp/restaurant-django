@@ -1,0 +1,31 @@
+/* import google fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Italiana&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+.lato{
+    font-family: "Lato", sans-serif;
+}
+
+.italiana{
+    font-family: "Italiana", sans-serif;
+}
+
+.arvo{
+    font-family: "Arvo", serif;
+}
+
+/* header  */
+.bg-header{
+    background-color: #40503F;
+    color: #FAFAFA;
+    position: sticky;
+    top:0;
+    z-index: 999;
+}
+
+.nav-link{
+    color: #FAFAFA;
+}
+
+.nav-link:hover{
+    color:#c2c0c0;
+}

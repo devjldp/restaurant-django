@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Custom css  -->
+    <link rel="stylesheet" href="{% static  'css/styles.css %}">
+    <!-- placeholder for extra css  -->
+    {% block extra_css %} {% endblock %}
+    <title>Flavour Restaurant {% block title %} {% endblock %}</title>
+</head>
+<body>
+    <!-- navigation bar -->
+    <header class="d-flex justify-content-around align-items-center p-3">
+        <h1 class="m-0">Flavour Restaurant</h1>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="'nav-link">Book</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Log In</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+
+        {% block content %}
+        {% endblock %}
+
+
+    </main>
+
+
+    <!-- footer  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
