@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     # if you installed social accounts => allauth.socialaccounts
+    # Every time you create an app, you must include it here
+    'home',
 ]
 
 SITE_ID = 1
