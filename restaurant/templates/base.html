@@ -18,7 +18,7 @@
         <nav>
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link italiana">Home</a>
+                    <a href="{% url 'home:index' %}" class="nav-link italiana">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link italiana">Menu</a>
@@ -27,7 +27,7 @@
                     <a href="#" class="nav-link italiana">Book</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link italiana">Log In</a>
+                    <a href="{% url 'account_login' %}" class="nav-link italiana">Log In</a>
                 </li>
             </ul>
         </nav>
