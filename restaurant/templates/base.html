@@ -6,28 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!-- Custom css  -->
-    <link rel="stylesheet" href="{% static  'css/styles.css %}">
+    <link rel="stylesheet" href="{% static  'css/styles.css' %}">
     <!-- placeholder for extra css  -->
     {% block extra_css %} {% endblock %}
     <title>Flavour Restaurant {% block title %} {% endblock %}</title>
 </head>
 <body>
     <!-- navigation bar -->
-    <header class="d-flex justify-content-around align-items-center p-3">
-        <h1 class="m-0">Flavour Restaurant</h1>
+    <header class="d-flex justify-content-around align-items-center p-3 bg-header">
+        <h1 class="m-0 lato">Flavour Restaurant</h1>
         <nav>
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link italiana">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Menu</a>
+                    <a href="#" class="nav-link italiana">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="'nav-link">Book</a>
+                    <a href="#" class="nav-link italiana">Book</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Log In</a>
+                    <a href="#" class="nav-link italiana">Log In</a>
                 </li>
             </ul>
         </nav>
