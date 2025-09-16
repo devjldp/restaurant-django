@@ -1,14 +1,15 @@
 <!-- Inherti from base template -> extends -->
  {% extends 'base.html' %}
  {% block content %}
- <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <!-- <label for="password">Introduce your password: </label> -->
-    <!-- {{ form.login }}: username  -->
-    <!-- {{ form.password }}: password -->
-    <button type="submit" class="btn btn-primary w-100">Log In</button>
-    <p>Not registered <a href="{% url 'account_signup' %}">Sign up</a></p>
- <!-- </form>
+   <form method="post" class="text-center mt-4">
+      <h2>Log In</h2>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <!-- <label for="password">Introduce your password: </label> -->
+      <!-- {{ form.login }}: username  -->
+      <!-- {{ form.password }}: password -->
+      <button type="submit" class="btn btn-primary w-auto px-4">Log In</button>
+   </form>
+   <p class="text-center mt-3">Not registered <a href="{% url 'account_signup' %}">Sign up</a></p>
 
  {% endblock %}

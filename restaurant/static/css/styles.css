@@ -1,6 +1,9 @@
 /* import google fonts  */
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Italiana&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+
+
+
 .lato{
     font-family: "Lato", sans-serif;
 }
@@ -29,3 +32,17 @@
 .nav-link:hover{
     color:#c2c0c0;
 }
+
+.signup-form ul{
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.signup-form ul li{
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+

@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %} | Sign Up {% endblock %}
 
 {% block content %}
-<form method="post" class="mx-auto" style="max-width: 400px;">
+<form method="post" class="signup-form text-center mt-4">
         <h2>Sign Up</h2>
         {% csrf_token %}
         {{ form.as_p }}
-         
-        <!-- <label for="username" class="sr-only italiana">Username | Email</label>
-        {{ form.login }}
-        <br>
-        <label for="password" class="sr-only">Password</label>
-        {{ form.password }} -->
-        <button type="submit" class="btn btn-primary w-100">Signup</button>
+        <button type="submit" class="btn btn-primary w-auto px-4">Signup</button>
     </form>
     <p class="text-center mt-3">
         Already account? <a href="{% url 'account_login' %}">Log in here</a>
     </p>
+
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{% static 'js/script_remove_liststyle.js' %}"></script>
 {% endblock %}
