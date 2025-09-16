@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
+{% block title %} | Sign Up {% endblock %}
 
 {% block content %}
-<h2>Sign up here</h2>
+<form method="post" class="mx-auto" style="max-width: 400px;">
+        <h2>Sign Up</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+         
+        <!-- <label for="username" class="sr-only italiana">Username | Email</label>
+        {{ form.login }}
+        <br>
+        <label for="password" class="sr-only">Password</label>
+        {{ form.password }} -->
+        <button type="submit" class="btn btn-primary w-100">Signup</button>
+    </form>
+    <p class="text-center mt-3">
+        Already account? <a href="{% url 'account_login' %}">Log in here</a>
+    </p>
 {% endblock %}
