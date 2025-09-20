@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Menu</h2>
+    {% if menu %}
+     <!-- do something  -->
+        {% for item in menu %} 
+            <h3>{{ item.name }}</h3>
+            <p>Category: {{ item.category.name }}</p>
+            <p>Descripttion: {{ item.description }}</p>
+            <p>Price: £{{ item.price }}</p>
+        {% endfor %}
+    {% else %} 
+    <h3>There is no menu to display! Sorry!</h3>
+    {% endif %}
+
+{% endblock %}
