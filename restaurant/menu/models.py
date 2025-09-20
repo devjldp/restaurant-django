@@ -2,14 +2,17 @@ from django.db import models
 
 # Create your models here.
 
-class Category(models.Models):
+class Category(models.Model):
     name = models.CharField(max_length=150)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now = True)
 
+    class Meta:
+        verbose_name_plural = "Categories"
     def __str__(self):
         return self.name
+
     
 class Ingredient(models.Model):
     name = models.CharField(max_length=150)
@@ -22,8 +25,8 @@ class Ingredient(models.Model):
 class MenuItem(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
-    price = models.DecimalField()
-    calories = models.IntegerField
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    calories = models.IntegerField(default=0)
 
     # Relationship 1 - M: 1 Category - Many MenuItem
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null = True, related_name='menu_items')
