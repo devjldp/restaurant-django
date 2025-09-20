@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # if you installed social accounts => allauth.socialaccounts
     # Every time you create an app, you must include it here
     'home',
+    'menu',
 ]
 
 SITE_ID = 1
@@ -168,6 +169,9 @@ STATICFILES_DIRS = [
 ]
 
 
+# media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
