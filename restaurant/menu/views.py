@@ -33,3 +33,28 @@ def select_all_menu(request):
         #'order' : var2
     }
     return render(request, 'menu.html', context)
+
+
+def menu_detail(request, dish_id):
+    """
+    This view retrieve a single dish form our database and its ingredients.
+    """
+
+    try:
+        # I am retrieving a single object from table MenuItem
+        dish = MenuItem.objects.get(id = dish_id)
+        print(dish)
+        # Using the object retrieved, we are gogint to retrieve all objects related to ingredients field
+        ingredients = dish.ingredients.all()
+    except DatabaseError as e:
+        print(f"There is an error in the query. Error: {e}")
+        dish = None
+        ingredients = []
+    
+    # context
+    context = {
+        'item': dish,
+        'ingredients': ingredients
+    }
+
+    return render(request, 'menu_detail.html', context)

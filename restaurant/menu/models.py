@@ -36,7 +36,6 @@ class MenuItem(models.Model):
 
     is_vegetarian = models.BooleanField(default = False)
     is_vegan = models.BooleanField(default = False)
-    is_vegan = models.BooleanField(default = False)
     is_available = models.BooleanField(default = True)
     is_available_delivery = models.BooleanField(default = True)
 
