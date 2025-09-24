@@ -1,22 +1,65 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'menu/css/styles.css' %}">
+{% endblock %}
+
 {% block content %}
-
-    <h2>Menu</h2>
+    <h2 class="text-center mb-4">Menú</h2>
     {% if menu %}
-     <!-- do something  -->
-        {% for item in menu %} 
-            <h3>{{ item.name }}</h3>
-            <img src="{{ item.image.url }}" alt="">
-            <p>Category: {{ item.category.name }}</p>
-            <p>Descripttion: {{ item.description }}</p>
-            <p>Price: £{{ item.price }}</p>
-            <button>Order</button>
-            <br>
-            <a href="{% url 'menu:menu_detail' item.id %}">Details</a>
-        {% endfor %}
-    {% else %} 
-    <h3>There is no menu to display! Sorry!</h3>
+    <div class="container">
+        <div class="row">
+            {% for item in menu %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card h-100 d-flex flex-column border-0 shadow-sm">
+                    <!-- Background image section -->
+                    <div class="menu-image-container d-flex align-items-center justify-content-center position-relative" 
+                         style="background-image: url('{{ item.image.url }}'); 
+                                background-size: cover; 
+                                background-position: center; 
+                                background-repeat: no-repeat;
+                                height: 250px;
+                                border-radius: 15px 15px 0 0;">
+                        <!-- Optional overlay for better text readability -->
+                        <div class="overlay-badge position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-warning text-dark">£{{ item.price }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Content section -->
+                    <div class="card-body d-flex flex-column p-3">
+                        <h5 class="card-title mb-2 italiana">{{ item.name }}</h5>
+                        <p class="card-text text-start fs-6 flex-grow-1 text-muted lato">{{ item.description }}</p>
+                        <p class="card-text mb-3"><strong class="h6 text-success">Price: £{{ item.price }}</strong></p>
+                        
+                        <!-- Buttons aligned at the bottom -->
+                        <div class="mt-auto d-flex gap-2">
+                            <button class="btn btn-primary flex-fill">
+                                <i class="fas fa-cart-plus"></i> Order
+                            </button>
+                            <a href="{% url 'menu:menu_detail' item.id %}" class="btn btn-outline-primary flex-fill">
+                                    <i class="fas fa-info-circle"></i> Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-utensils fa-2x mb-3"></i>
+                        <h4>Menu Not Available</h4>
+                        <p class="mb-0">Sorry, our menu is currently not available. Please check back later!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
-
 {% endblock %}

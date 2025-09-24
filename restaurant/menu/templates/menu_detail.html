@@ -1,22 +1,22 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 
 {% block content %}
-    {% if item %}
-     <!-- do something  -->
-            <h3>{{ item.name }}</h3>
-            <img src="{{ item.image.url }}" alt="">
-            <p>Category: {{ item.category.name }}</p>
-            <p>Description: {{ item.description }}</p>
-            <p>Price: £{{ item.price }}</p>
-            <ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
+        </div>
+        <div class="col-md-6">
+            <h2 class="text-center">{{ item.name }}</h1>
+            <p>{{ item.description }}</p>
+            <p class="h3 text-success text-center">£{{ item.price }}</p>
+            <ul class="text-center">
                 {% for ingredient in ingredients %}
-                    <li>{{ingredient.name}}</li>
+                    <li class="list-group-item">{{ingredient.name}}</li>
                 {% endfor %}
             </ul>
-            <br>
-            <a href="{% url 'menu:menu_list' %}">Go back menu</a>
-    {% else %} 
-    <h3>There is no menu to display! Sorry!</h3>
-    {% endif %}
-
+            <a href="{% url 'menu:menu_list' %}" class="btn btn-secondary">← Go back menu</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
