@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 # import MenuItem model from menu app
 from menu.models import MenuItem
 
+# import forms from menu app
+from menu.forms import MenuItemForm
+
 # Create your views here.
 @login_required
 def post_login_redirect(request):
@@ -39,10 +42,38 @@ def management_select_all_dishes(request):
     # Get all object(dishes) in the menu: -> we need to import the models.
     
     # Use try and except to improve how to handle errors
-    dishes = MenuItem.objects.all()
+    try:
+        dishes = MenuItem.objects.all()
+    except Exception as e:
+        print(f"There is an error retrieving data: {e}")
 
     context = {
         'menu': dishes
     }
 
     return render(request, 'dashboard_dishes.html', context)
+
+@login_required
+def management_add_dish(request):
+    """
+    View to add a new dish into the database.
+    Handles GET and POST methods:
+        - GET displays an empty MenuItemForm
+        - POST validates the form and insert a new dish in the database.
+    Args:
+        - request
+    returns:
+        - Response renders the dashboard_add_dish.html template with the form.
+    """
+    if request.method == 'POST':
+        # Get the information:
+        form = MenuItemForm(request.POST)
+        # insert data in the database
+        try:
+            form.save()
+            return redirect('management:list_dishes')
+        except Exception as e:
+            print(f"There is an error inserting a new dish: {e}")
+    else:
+        form = MenuItemForm
+    return render(request, 'dashboard_add_dish.html', {'form': form })

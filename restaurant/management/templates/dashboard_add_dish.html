@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Add a new dish</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- This command renders the form -->
+        <button type="submit">Add a new dish</button>
+    </form>
+
+    <a href="{%url 'management:home' %}">Go back dashboard</a>
+
+{% endblock %}

@@ -15,6 +15,6 @@
         <p>There is not dishes in the database.</p>
     {% endif %}
 
-    <a href="#">Add a new dish</a><br>
+    <a href="{%url 'management:add_dish' %}">Add a new dish</a><br>
     <a href="{% url 'management:home' %}">Go back Dashboard</a>
 {% endblock %}
