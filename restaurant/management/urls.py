@@ -11,5 +11,6 @@ app_name = 'management'
 urlpatterns = [
     path('dashboard/', views.management_home, name='home'),
     # define more paths - urls
+    path('dashboard/dishes/', views.management_select_all_dishes, name='list_dishes'),
     
 ]
