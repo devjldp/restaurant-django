@@ -88,8 +88,10 @@ ROOT_URLCONF = 'restaurant.urls'
 
 #login
 LOGIN_URL = 'account_login'
-# LOGIN_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = '/redirect_post_login/' 
 
+# logout -> home
+LOGOUT_REDIRECT_URL ='/'
 
 
 TEMPLATES = [

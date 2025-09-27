@@ -9,7 +9,6 @@ def post_login_redirect(request):
     Redirectusers based on their role.
     """
     user = request.user
-
     # If statement to redirect user
     if user.is_superuser:
         # redirect to dashboard
@@ -26,4 +25,4 @@ def management_home(request):
     """
     if not request.user.is_superuser:
         return redirect('home:index')
-    return render('dashboar.html')
+    return render(request, 'dashboard.html')
