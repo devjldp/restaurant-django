@@ -19,3 +19,9 @@ class MenuItemForm(forms.ModelForm):
             'ingredients':forms.CheckboxSelectMultiple(),
         }
         
+# Create the form to update the price -> field price
+
+class UpdatePriceForm(forms.ModelForm):
+    class Meta:
+        model = MenuItem
+        fields = ['price']
