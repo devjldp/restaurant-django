@@ -2,6 +2,13 @@
 
 {% block content %}
     <h2>Dishes in the restaurant</h2>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
     {% if menu %}
         <ul>
             {% for dish in menu %}

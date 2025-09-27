@@ -2,6 +2,13 @@
 
 {% block content %}
     <h1>Welcome to dashboard!!!</h1>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
     <ul>
         <li class="list-group-item">
             <a href="{% url 'management:list_dishes' %}">Dishes</a></li>

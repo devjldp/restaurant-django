@@ -3,6 +3,14 @@
 {% block content %}
 
     <h2>Update a dish</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     {% if dish %}
         <h3>{{ dish.name }}</h3>
     {% endif %}

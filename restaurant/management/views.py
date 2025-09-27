@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from django.contrib.auth.decorators import login_required
+#import messages
+from django.contrib import messages
 
 # import MenuItem model from menu app
 from menu.models import MenuItem
@@ -71,9 +72,11 @@ def management_add_dish(request):
         # insert data in the database
         try:
             form.save()
+            messages.success(request, "Dish added successfully")
             return redirect('management:list_dishes')
         except Exception as e:
             print(f"There is an error inserting a new dish: {e}")
+            messages.error(request, "There was an error creating a new dish")
     else:
         form = MenuItemForm()
     return render(request, 'dashboard_add_dish.html', {'form': form })
@@ -89,8 +92,10 @@ def management_delete_dish(request, dish_id):
         dish = MenuItem.objects.get(id = dish_id)
         # dish = get_object_or_404(MenuItem, id=dish_id)
         dish.delete()
+        messages.success(request, "Dish deleted successfully")
     except Exception as e:
         print(f"There is an error deleting the dish: {e}")
+        messages.error(request, "There was an error deleting a new dish")
     
     return redirect('management:list_dishes')
 
@@ -106,9 +111,13 @@ def management_update_dish(request, dish_id):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, "Dish was updated")
                 return redirect('management:list_dishes')
             except Exception as e:
                 print(f"There is an error updating the dish: {e}")
+                messages.error(request, "There was an error updating the dish")
+        else:
+            messages.warning(request, "Please correct the mistakes you have in the form.")
     else:
         form = UpdatePriceForm()
     
