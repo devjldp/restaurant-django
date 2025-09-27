@@ -3,7 +3,7 @@
 {% block content %}
 
     <h2>Add a new dish</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }} <!-- This command renders the form -->
         <button type="submit">Add a new dish</button>

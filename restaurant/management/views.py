@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 
@@ -67,7 +67,7 @@ def management_add_dish(request):
     """
     if request.method == 'POST':
         # Get the information:
-        form = MenuItemForm(request.POST)
+        form = MenuItemForm(request.POST, request.FILES)
         # insert data in the database
         try:
             form.save()
@@ -77,3 +77,19 @@ def management_add_dish(request):
     else:
         form = MenuItemForm
     return render(request, 'dashboard_add_dish.html', {'form': form })
+
+
+@login_required
+def management_delete_dish(request, dish_id):
+    """
+    Don't forget comment your methods / functions
+    """
+    # When we remove a dish we are going to select only one dish using id. #get and get_object_or_404
+    try:
+        dish = MenuItem.objects.get(id = dish_id)
+        # dish = get_object_or_404(MenuItem, id=dish_id)
+        dish.delete()
+    except Exception as e:
+        print(f"There is an error deleting the dish: {e}")
+    
+    return redirect('management:list_dishes')
