@@ -23,12 +23,33 @@
                 <li class="nav-item">
                     <a href="{% url 'menu:menu_list' %}" class="nav-link italiana" aria-label="Display menu">Menu</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link italiana" aria-label="Book a table">Book</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'account_login' %}" class="nav-link italiana" aria-label="Log in">Log In</a>
-                </li>
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                    <!-- Show navigation bar for superuser  -->
+                    <li class="nav-item">
+                        <a href="{% url 'admin:index' %}" target="_blank" rel="noopener noreferrer" 
+                        class="nav-link italiana" aria-label="visit django admin site">Admin dashboard</a>
+                    </li>
+                    {% else %}
+                      <!-- navigation for customers  -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link italiana" aria-label="Book a table">Book</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link italiana" aria-label="Go to your cart">cart</a>
+                        </li>
+                    {% endif %}
+                        <li class="nav-item">
+                            <a href="{% url 'account_logout' %}" 
+                            class="nav-link italiana" aria-label="Log Out">Log Out</a>
+                        </li>
+
+                {% else %} 
+                    <li class="nav-item">
+                        <a href="{% url 'account_login' %}" class="nav-link italiana" aria-label="Log in">Log In</a>
+                    </li>
+                {% endif %}
+
             </ul>
         </nav>
     </header>
