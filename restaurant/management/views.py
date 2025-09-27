@@ -13,14 +13,14 @@ def post_login_redirect(request):
     # If statement to redirect user
     if user.is_superuser:
         # redirect to dashboard
-        return None
+        return redirect('management:home')
     else: 
         # regular customers -> to landing page
         return redirect('home:index')
 
 
 @login_required
-def managemnet_home(request):
+def management_home(request):
     """
     Render the dashboard only for superusers
     """

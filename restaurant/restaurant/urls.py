@@ -21,11 +21,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+#import view post_login_redirect
+
+from management.views import post_login_redirect
 urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
     path('accounts/',include('allauth.urls')),
-    path('menu/', include('menu.urls'))
+    path('menu/', include('menu.urls')),
+    path('management/', include('management.urls')),
+    path('redirecrt_post_login', post_login_redirect, name='post-loging-redirect')
 ]
 
 # Only for development
