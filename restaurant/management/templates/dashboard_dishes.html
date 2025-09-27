@@ -6,7 +6,7 @@
         <ul>
             {% for dish in menu %}
                 <li class="list-group-item">{{ dish.name|capfirst }}</li>
-                <a href="#">Update</a>
+                <a href="{% url 'management:update_dish' dish.id %}">Update</a>
                 <a href="{% url 'management:delete_dish' dish.id %}">Delete</a>
             {% endfor %}
         </ul>
