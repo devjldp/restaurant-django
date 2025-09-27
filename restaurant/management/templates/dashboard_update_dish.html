@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Update a dish</h2>
+    {% if dish %}
+        <h3>{{ dish.name }}</h3>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- This command renders the form -->
+        <button type="submit">Update dish</button>
+    </form>
+
+    <a href="{% url 'management:home' %}">Cancel</a>
+
+{% endblock %}
