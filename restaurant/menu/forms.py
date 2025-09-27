@@ -11,7 +11,7 @@ class MenuItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem
         fields = ['name', 'description', 'price', 'calories', 'category', 'ingredients', 'is_vegetarian',
-                  'is_vegan', 'is_available', 'is_available_delivery']
+                  'is_vegan', 'is_available', 'is_available_delivery', 'image']
         
         widgets = {
             'description': forms.Textarea(attrs={'rows':4}),
