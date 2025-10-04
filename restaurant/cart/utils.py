@@ -6,7 +6,7 @@ def get_cart(request):
     """
     Get the cart from the session:
     The cart will be a dictionary: (key value pair)
-        - key: dish id
+        - key: dish id -> will be a string
         - value: number of dishes ordered
     return: the cart session
     """
