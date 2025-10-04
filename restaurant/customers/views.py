@@ -18,7 +18,7 @@ def create_profile(request):
         form = CustomerProfileForm(request.POST, instance = profile)
         if form.is_valid(): # validate the form
             form.save()
-            messages.success("Your profile has been updated")
+            messages.success(request, "Your profile has been updated")
             return redirect('home:index')
     else: # Display the form
         form = CustomerProfileForm(instance=profile)
