@@ -16,7 +16,7 @@ class CustomerProfile(models.Model):
     last_name = models.CharField(max_length=50, blank=True, null=True)
     street = models.CharField(max_length=250)
     city = models.CharField(max_length=100)
-    post_code = models.CharField(max_length=25)
+    postal_code = models.CharField(max_length=25)
     phone_number = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -22,7 +22,7 @@ def post_login_redirect(request):
         return redirect('management:home')
     else: 
         # regular customers -> to landing page
-        return redirect('home:index')
+        return redirect('customers:create_profile')
 
 
 @login_required

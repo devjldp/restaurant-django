@@ -6,7 +6,7 @@ from .models import CustomerProfile
 class CustomerProfileForm(forms.ModelForm):
     class Meta:
         model = CustomerProfile
-        fields =['first_name', 'last_name', 'street', 'city', 'post_code', 'phone_number']
+        fields =['first_name', 'last_name', 'street', 'city', 'postal_code', 'phone_number']
 
         def __init__(self, *args, **kwargs):
             super().__init__(self, *args, **kwargs)
