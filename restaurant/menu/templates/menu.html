@@ -8,6 +8,11 @@
 
 {% block content %}
     <h2 class="text-center mb-4">Menú</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ messages }}</p>
+        {% endfor %}
+    {% endif %}
     {% if menu %}
     <div class="container">
         <div class="row">
@@ -37,9 +42,9 @@
                         
                         <!-- Buttons aligned at the bottom -->
                         <div class="mt-auto d-flex gap-2">
-                            <button class="btn btn-primary flex-fill">
+                            <a href="{% url 'cart:add_to_cart' item.id %}" class="btn btn-primary flex-fill" aria-label="Add dish to the cart">
                                 <i class="fas fa-cart-plus"></i> Order
-                            </button>
+                            </a>
                             <a href="{% url 'menu:menu_detail' item.id %}" class="btn btn-outline-primary flex-fill">
                                     <i class="fas fa-info-circle"></i> Details
                             </a>

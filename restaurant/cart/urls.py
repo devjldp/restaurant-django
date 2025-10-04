@@ -9,5 +9,6 @@ app_name = 'cart'
 
 # Define the url patterns
 urlpatterns = [
+    path('', views.display_cart, name='cart'),
     path('add/<int:dish_id>', views.add_to_cart, name='add_to_cart'),
 ]

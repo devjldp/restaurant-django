@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if cart_dishes %}
+<!-- table to display our cart -->
+ <table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th scope="col">Dish name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col"></th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for dish in cart_dishes %}
+        <tr>
+            <td>{{ dish.dish_data.name }}</td>
+            <td>
+                {{ dish.quantity }}
+                <a href="" class="text-decoration-none">+</a>
+                <a href="" class="text-decoration-none">-</a>
+            </td>
+            <td>{{ dish.total_price }}</td>
+            <td>
+                <a href="" class="text-decoration-none">Update</a>
+                <a href="" class="text-decoration-none">Remove</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+
+
+
+
+ </table>
+{% else %}
+<h3>Your cart is empty</h3>
+{% endif %}
+
+<a href="" aria-label="Go back to menu" class="btn btn-primary flex-fill">Go back to menu</a>
+
+
+{% endblock %}
