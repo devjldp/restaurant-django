@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Profile</h3>
+{% if username %}
+ {{ username }}
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+<a href="{% url 'home:index' %}">Go back home</a>
+{% endblock %}
