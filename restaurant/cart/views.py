@@ -35,6 +35,7 @@ def add_to_cart(request, dish_id):
         # debugging purpose
         for dish_id, quantity in cart.items(): # dictionary python -> how to print keys and values form a dictionary
             print(f"ID:{dish_id} - Quantity: {quantity}")
+        print(cart.keys())
 
     except Exception as e:
         messages.error(request, "The dish could not be added to the cart.")
@@ -49,7 +50,7 @@ def display_cart(request):
     cart = get_cart(request)
 
     # Get a list with the dish ids in our cart -> keys
-    dish_ids = cart.Keys() # returns a list with all keys in the dictionary
+    dish_ids = cart.keys() # returns a list with all keys in the dictionary
 
     # Query the database
     dishes = MenuItem.objects.filter(id__in=dish_ids)
@@ -58,7 +59,7 @@ def display_cart(request):
     for dish in dishes:
         dish_data={
             'dish_data': dish, #dish is an object type MenuItem
-            'quanty': cart[str(dish.id)],
+            'quantity': cart[str(dish.id)],
             'total_price': dish.price * cart[str(dish.id)]
         }
         cart_dishes.append(dish_data)
@@ -66,5 +67,44 @@ def display_cart(request):
     context = {
         'cart_dishes': cart_dishes
     }
+    print(cart_dishes)
 
     return render(request, 'cart_detail.html', context)
+
+def increase_dish(request, dish_id):
+    # You need add docstrings and try and except
+    cart = get_cart(request)
+    dish_id_str = str(dish_id) # transform dish_id number to string
+
+    if dish_id_str in cart:
+        cart[dish_id_str] += 1
+    save_cart(request, cart)
+    return redirect('cart:cart')
+
+def decrease_dish(request, dish_id):
+    # You need add docstrings and try and except
+    cart = get_cart(request)
+    dish_id_str = str(dish_id) # transform dish_id number to string
+
+    if dish_id_str in cart:
+        if cart[dish_id_str] > 0:
+            cart[dish_id_str] -= 1
+    save_cart(request, cart)
+    return redirect('cart:cart')
+
+def remove_dish(request, dish_id):
+    # You need add docstrings and try and except
+    cart = get_cart(request)
+    dish_id_str = str(dish_id) # transform dish_id number to string
+
+    if dish_id_str in cart:
+        del cart[dish_id_str]
+    save_cart(request, cart)
+    return redirect('cart:cart')
+
+def clear_cart(request):
+    # You need add docstrings and try and except
+    cart = get_cart(request)
+    cart.clear()
+    save_cart(request, cart)
+    return redirect('cart:cart')

@@ -20,13 +20,12 @@
             <td>{{ dish.dish_data.name }}</td>
             <td>
                 {{ dish.quantity }}
-                <a href="" class="text-decoration-none">+</a>
-                <a href="" class="text-decoration-none">-</a>
+                <a href="{% url 'cart:increase_dish' dish.dish_data.id %}" class="text-decoration-none">+</a>
+                <a href="{% url 'cart:decrease_dish' dish.dish_data.id %}" class="text-decoration-none">-</a>
             </td>
             <td>{{ dish.total_price }}</td>
             <td>
-                <a href="" class="text-decoration-none">Update</a>
-                <a href="" class="text-decoration-none">Remove</a>
+                <a href="{% url 'cart:remove_dish' dish.dish_data.id %}" class="text-decoration-none">Remove</a>
             </td>
         </tr>
         {% endfor %}
@@ -42,7 +41,9 @@
 <h3>Your cart is empty</h3>
 {% endif %}
 
-<a href="" aria-label="Go back to menu" class="btn btn-primary flex-fill">Go back to menu</a>
+<a href="{% url 'menu:menu_list' %}" aria-label="Go back to menu" class="btn btn-primary flex-fill">Cancel</a>
+<a href="{% url 'cart:clear_cart' %}" aria-label="Clear cart" class="btn btn-primary flex-fill">Clear Cart</a>
+<a href="#" aria-label="Check out" class="btn btn-primary flex-fill">Check out</a>
 
 
 {% endblock %}
