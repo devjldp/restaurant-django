@@ -92,6 +92,8 @@ def management_delete_dish(request, dish_id):
         dish = MenuItem.objects.get(id = dish_id)
         # dish = get_object_or_404(MenuItem, id=dish_id)
         dish.delete()
+        # implement remove image funcionality
+        
         messages.success(request, "Dish deleted successfully")
     except Exception as e:
         print(f"There is an error deleting the dish: {e}")
