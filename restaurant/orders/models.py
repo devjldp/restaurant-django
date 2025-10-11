@@ -20,6 +20,8 @@ class Order(models.Model):
                               choices= Status.choices,
                               default=Status.PENDING)
     
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    
 
 class Order_MenuItem(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_products' )
