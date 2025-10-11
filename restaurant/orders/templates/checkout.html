@@ -22,7 +22,7 @@
                             <td>{{ product.quantity }}</td>
                             <td>{{ product.get_subtotal|floatformat:2 }}</td>
                         </tr>
-                    {% endblock %}
+                    {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
@@ -31,6 +31,7 @@
                     </tr>
                 </tfoot>
             </table>
+            <a href="{%url 'menu:menu_list' %}" class="btn btn-primary">Cancel</a>
         {% else %}
             <h3 class="text-center">Your cart is empty </h3>
         {% endif %}
