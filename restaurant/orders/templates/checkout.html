@@ -5,6 +5,7 @@
 <h2 class="text-center"> Checkout </h2>
 
 <div class="d-flex flex-row justify-content-around align-items-stretch">
+    <!-- Display order details  -->
     <section>
         {% if order and order_products %}
             <table class="table table-stripped">
@@ -31,13 +32,21 @@
                     </tr>
                 </tfoot>
             </table>
-            <a href="{%url 'menu:menu_list' %}" class="btn btn-primary">Cancel</a>
+            
         {% else %}
             <h3 class="text-center">Your cart is empty </h3>
         {% endif %}
     </section>
+    <!-- render a form  -->
     <section>
-        <!-- render a form  -->
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ order_form.as_p }}
+            <button type="submit" class="btn btn-primary">Pay</button>
+            <a href="{%url 'menu:menu_list' %}" class="btn btn-primary">Cancel</a>
+        </form>
+
     </section>
 </div>
 

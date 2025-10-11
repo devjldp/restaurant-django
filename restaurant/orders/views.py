@@ -9,7 +9,8 @@ from customers.models import CustomerProfile
 # import cart utils
 from cart.utils import get_cart, save_cart
 
-
+# import forms
+from .forms import OrderForm
 # Create your views here.
 
 def create_order(request):
@@ -48,12 +49,17 @@ def create_order(request):
     # Update the total field in the order object
     order.total = total_products
     order.save()
-
+    # Create the form object -> instance of OrderForm , pass as parameter the object customer
+    if request.method == 'POST':
+        form = OrderForm(request.POST,instance=customer)
+    else:
+        form = OrderForm(instance=customer) 
     # Context
     context = {
         'customer': customer,
         'order': order,
-        'order_products': order.order_products.all()
+        'order_products': order.order_products.all(),
+        'order_form': form
     }
 
     return render(request, 'checkout.html', context)
