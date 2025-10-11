@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center"> Checkout </h2>
+
+<div class="d-flex flex-row justify-content-around align-items-stretch">
+    <section>
+        {% if order and order_products %}
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th scope="col">Dish</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="sol">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in order_products %}
+                        <tr>
+                            <td>{{ product.product_id.name }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.get_subtotal|floatformat:2 }}</td>
+                        </tr>
+                    {% endblock %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-end">Total</td>
+                        <td>{{ order.total|floatformat:2 }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        {% else %}
+            <h3 class="text-center">Your cart is empty </h3>
+        {% endif %}
+    </section>
+    <section>
+        <!-- render a form  -->
+    </section>
+</div>
+
+{% endblock %}
