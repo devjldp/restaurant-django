@@ -40,7 +40,7 @@
     <!-- render a form  -->
     <section>
         
-        <form method="post" action="{% url 'orders:pay_order' order_id %}" id="form-id">
+        <form method="post" action="{% url 'orders:pay_order' order.id %}" id="form-id">
             {% csrf_token %}
             {{ order_form.as_p }}
             <button type="submit" class="btn btn-primary">Pay</button>
