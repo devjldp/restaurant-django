@@ -16,6 +16,10 @@ from .forms import OrderForm
 #import stripe
 import stripe
 
+#import stripe API KEY
+# import the secret key
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 # Create your views here.
 
 def create_order(request):
@@ -77,7 +81,7 @@ def create_stripe_checkout(order):
         line_items.append({
             'price_data':{
                 'currency': 'gbp',
-                'unit_amout':int(item.price*100),
+                'unit_amount':int(item.price*100),
                 'product_data':{
                     'name':item.product_id.name
                 }
@@ -86,8 +90,8 @@ def create_stripe_checkout(order):
         })
     
     # urls: success payment and cancell payment
-    success_url = settings.SITE_URL + reverse() # define reverse path
-    cancel_url = settings.SITE_URL + reverse()
+    success_url = settings.SITE_URL + reverse('orders:payment_success', kwargs={'order_id': order.id}) # define reverse path
+    cancel_url = settings.SITE_URL + reverse('orders:payment_cancel', kwargs={'order_id':order.id})
 
     # Write the code to create the session => checkout
     checkout_session = stripe.checkout.Session.create(
@@ -104,7 +108,7 @@ def create_stripe_checkout(order):
 def pay_order(request, order_id):
     order = Order.objects.get(pk=order_id)
     if request.method == 'POST':
-        form = OrderForm(request.POST, instace= order.customer)
+        form = OrderForm(request.POST, instance= order.customer)
         # validate the form
         if form.is_valid():
             form.save()
