@@ -29,6 +29,10 @@ env.read_env(BASE_DIR/'.env')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str("SECRET_KEY")
 
+# sTRIPE kEYS
+STRIPE_PUBLISHABLE_KEY=env("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY=env("STRIPE_SECRET_KEY")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -183,3 +187,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# url BASE OF OUR APP
+if DEBUG:
+    SITE_URL = "http://127.0.0.1:8000" # "http://localhost:8000"
+else:
+    SITE_URL="https://your domain"
