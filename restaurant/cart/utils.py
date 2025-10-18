@@ -27,3 +27,9 @@ def save_cart(request, cart): # cart updated
         request.session.modified = True
     except Exception as e:
         print(f"Error: {e}")
+
+
+def clear_cart(request):
+    if 'cart' in request.session:
+        del request.session['cart']
+        request.session.modified = True

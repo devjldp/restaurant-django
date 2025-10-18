@@ -8,7 +8,7 @@ from menu.models import MenuItem
 from customers.models import CustomerProfile
 
 # import cart utils
-from cart.utils import get_cart, save_cart
+from cart.utils import get_cart, save_cart, clear_cart
 
 # import forms
 from .forms import OrderForm
@@ -17,7 +17,7 @@ from .forms import OrderForm
 import stripe
 
 #import stripe API KEY
-# import the secret key
+# USe the secret key
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
@@ -131,8 +131,11 @@ def payment_succes(request, order_id):
     order = Order.objects.get(pk = order_id)
 
     if order.status != Order.Status.PROCESSED:
-        order.status = Order.status.PROCESSED
+        order.status = Order.Status.PROCESSED
         order.save()
+    
+    #clear the cart
+    clear_cart(request)
 
     return render(request, 'payment_success.html', {'order': order})
 
