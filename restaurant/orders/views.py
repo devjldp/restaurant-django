@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
+from django.conf import settings
+from django.urls import reverse
 
 from .models import Order, Order_MenuItem
 from menu.models import MenuItem
@@ -11,6 +12,10 @@ from cart.utils import get_cart, save_cart
 
 # import forms
 from .forms import OrderForm
+
+#import stripe
+import stripe
+
 # Create your views here.
 
 def create_order(request):
@@ -63,3 +68,34 @@ def create_order(request):
     }
 
     return render(request, 'checkout.html', context)
+
+
+
+def create_stripe_checkout(order):
+    line_items = []
+    for item in order.order_products.all():
+        line_items.append({
+            'price_data':{
+                'currency': 'gbp',
+                'unit_amout':int(item.price*100),
+                'product_data':{
+                    'name':item.product_id.name
+                }
+            },
+            'quantity': item.quantity
+        })
+    
+    # urls: success payment and cancell payment
+    success_url = settings.SITE_URL + reverse() # define reverse path
+    cancel_url = settings.SITE_URL + reverse()
+
+    # Write the code to create the session => checkout
+    checkout_session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=line_items,
+        mode='payment',
+        success_url=success_url,
+        cancel_url=cancel_url 
+    )
+
+    return checkout_session
