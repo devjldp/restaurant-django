@@ -40,11 +40,11 @@
     <!-- render a form  -->
     <section>
         
-        <form method="post">
+        <form method="post" action="{% url 'orders:pay_order' order_id %}" id="form-id">
             {% csrf_token %}
             {{ order_form.as_p }}
             <button type="submit" class="btn btn-primary">Pay</button>
-            <a href="{%url 'menu:menu_list' %}" class="btn btn-primary">Cancel</a>
+            <a href="{% url 'menu:menu_list' %}" class="btn btn-primary">Cancel</a>
         </form>
 
     </section>
