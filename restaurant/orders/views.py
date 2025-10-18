@@ -99,3 +99,44 @@ def create_stripe_checkout(order):
     )
 
     return checkout_session
+
+
+def pay_order(request, order_id):
+    order = Order.objects.get(pk=order_id)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instace= order.customer)
+        # validate the form
+        if form.is_valid():
+            form.save()
+            checkout_stripe_session = create_stripe_checkout(order)
+
+            # redirect the website to stripe website to pay
+            return redirect(checkout_stripe_session.url)
+    else:
+        form = OrderForm(instance = order.customer)
+    
+    context ={
+        'order': order,
+        'order_form': form
+    }
+    return render(request, 'checkout.html', context)
+    # return render(request, 'checkout.html', {'order': order, 'order_form' :form})
+
+    # if the payment is success 
+def payment_succes(request, order_id):
+    order = Order.objects.get(pk = order_id)
+
+    if order.status != Order.Status.PROCESSED:
+        order.status = Order.status.PROCESSED
+        order.save()
+
+    return render(request, 'payment_success.html', {'order': order})
+
+def payment_cancel(request, order_id):
+    order = Order.objects.get(pk = order_id)
+
+    if order.status == Order.Status.PENDING:
+        order.status = Order.status.CANCELLED
+        order.save()
+
+    return render(request, 'payment_cancel.html', {'order': order})
