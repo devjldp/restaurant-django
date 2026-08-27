@@ -9,6 +9,7 @@
     4. [Target Audience](#target-audience)
     5. [Value Proposition](#value-proposition)
     6. [Project Goals](#project-goals)
+
 2. [User Experience (UX)](#user-experience-ux)
     1. [User Research](#user-research)
     2. [User Personas](#user-personas)
@@ -19,6 +20,7 @@
     7. [User Journey](#user-journey)
     8. [Accesibility](#accesibility)
     9. [Responsive Design](#responsive-design)
+
 3. [Design Process](#design-process)
     1. [Design Concept](#design-concept)
     2. [Colour Scheme](#colour-scheme)
@@ -27,6 +29,27 @@
     5. [WireFrames](#wireframes)
     6. [Design Decisions](#design-decisions)
     7. [Design Iterations](#design-iterations)
+
+4. [Features](#features)
+    1. [Public Features](#public-features)
+    2. [User Features](#user-features)
+    3. [Authentication Features](#authentication-features)
+    4. [Booking Features](#booking-features)
+    5. [Shopping basket](#shopping-basket)
+    6. [Checkout and Payment](#checkout-and-payment)
+    7. [Administrator Features](#administrator-features)
+    8. [User Feedback](#user-feedback)
+    9. [Error Handling](#error-handling)
+    10. [Data Management and CRUD](#data-management-and-crud)
+
+5. [Technologies and Tools](#technologies-and-tools)
+    1. [Front-end Technologies](#front-end-technologies)
+    2. [Back-end Technologies](#back-end-technologies)
+    3. [Database](#database)
+    4. [Third-party Services and APIs](#third-party-services-and-apis)
+    5. [Development Tools](#development-tools)
+    6. [Testing Tools](#development-tools)
+    7. [Version Control](#development-tools)
 
 ## Project Overview
 
@@ -431,3 +454,260 @@ Examples of potential iterations include:
 * Adjusting layouts based on different screen sizes.
 
 *The final design combines the original restaurant concept with the functional requirements identified during planning.*
+
+## Features
+
+Features have been selected based on the identified user stories and the practical requirements of a real-world restaurant.
+
+The application separates public content from authenticated customer functionality and protected administrative functionality. This ensures that visitors can freely explore the restaurant while customer and management features remain appropriately secured.
+
+### Public Features
+
+Visitors can access the main restaurant information without creating an account.
+
+Public features include:
+
+* Restaurant introduction and branding.
+* Restaurant information.
+* Menu browsing.
+* Contact information.
+* Restaurant location.
+* Access to registration and login.
+* Access to the booking process.
+
+The public interface is designed to communicate the restaurant's purpose immediately and allow visitors to find important information with minimal interaction.
+
+### User Features
+
+Registered customers have access to additional functionality that requires an authenticated account.
+
+Authenticated users can:
+
+* View their account information.
+* Create restaurant bookings.
+* View their existing bookings.
+* Edit their own bookings.
+* Cancel their own bookings.
+* Add items to a shopping basket.
+* Review their basket before checkout.
+* Complete an online payment.
+* View relevant order information.
+* Receive confirmation and feedback following important actions.
+
+Customer functionality is protected so that users can only access information and operations appropriate to their account.
+
+### Authentication Features
+
+The application uses Django's authentication system to manage customer accounts securely. Authentication is required where the application needs to associate an action with a specific customer, such as creating or managing a booking or order.
+
+Users can:
+
+* Register for an account.
+* Log in.
+* Log out.
+
+### Booking Features
+
+The booking system allows registered customers to make and manage restaurant reservations.
+
+A customer can provide:
+
+* Booking date.
+* Booking time.
+* Number of guests.
+* Additional requests where applicable.
+
+Validation includes checking that:
+
+* Required information has been provided.
+* The selected date is valid.
+* A booking cannot be made for a date in the past.
+* The number of guests is within an appropriate range.
+* The requested booking time is valid.
+* Booking information belongs to the authenticated customer.
+
+### Shopping basket
+
+The shopping basket allows customers to select menu items before proceeding to checkout.
+
+Customers can:
+
+* Add an item to the basket.
+* View selected items.
+* Change quantities.
+* Remove items.
+* Review the total cost.
+* Continue shopping.
+* Proceed to checkout.
+
+The basket provides users with an opportunity to review their order before making a payment.  
+**Validation** is applied to prevent invalid quantities and ensure that unavailable products cannot be purchased.
+
+### Checkout and Payment
+
+The application provides online payment functionality using Stripe. Payment card information is handled by the payment provider (Stripe)
+
+The checkout process is designed to provide a clear and secure customer journey:
+
+* The customer reviews their basket.
+* The customer proceeds to checkout.
+* The application validates the order.
+* The customer is transferred to the secure payment process.
+* Stripe processes the payment.
+* The application handles the payment result.
+* The customer receives confirmation.
+
+### Administrator Features
+
+Administrative functionality is separated from the normal customer experience and protected through authentication and authorisation.
+
+Administrators can manage relevant restaurant data, including:
+
+* Menu categories.
+* Menu items.
+* Menu availability.
+* Customer bookings.
+* Booking status.
+
+Administrative functionality supports the restaurant's operational requirements while preventing ordinary customers from accessing protected data.  
+Permissions are applied at both the view and object level where appropriate.
+
+### User Feedback
+
+The application provides feedback following important user actions.
+
+Examples include:
+
+#### *Successful actions*
+
+* Login successful.
+* Booking created successfully.
+* Booking updated successfully.
+* Item added to basket.
+* Payment completed successfully.
+
+#### *Unsuccessful actions*
+
+* Invalid form information.
+* Unavailable menu item.
+* Unauthorised access.
+* Failed payment.
+
+Feedback messages are designed to be clear, concise and useful rather than simply reporting that an error has occurred.
+
+### Error Handling
+
+The application is designed to handle expected errors gracefully.
+
+Custom error handling is provided for common situations such as:
+
+* Invalid user input.
+* Missing resources.
+* Unauthorised access.
+* Failed database operations.
+* Payment failures.
+* External service failures.
+
+Custom error pages will be provided for relevant HTTP errors, including:
+
+* `403 Forbidden`
+* `404 Not Found`
+* `500 Internal Server Error`
+
+The purpose of defensive error handling is to prevent users from being exposed to technical error messages and to maintain a consistent user experience when something goes wrong.
+
+### Data Management and CRUD
+
+he application provides complete CRUD operations for appropriate database entities.
+
+CRUD functionality includes:
+
+* **Create:**
+
+  * Users can create relevant records, such as bookings.
+
+  * Administrators can create menu categories and menu items.
+
+* **Read:**
+
+  * Users can view their own bookings and orders.
+
+  * Administrators can view relevant restaurant data.
+
+* **Update:**
+
+  * Customers can update their own bookings.
+
+  * Administrators can update menu and booking information.
+
+* **Delete:**
+
+  * Customers can cancel their own bookings.
+
+  * Administrators can remove appropriate menu records.
+
+All data operations are validated and protected by appropriate permissions.
+
+## Technologies and Tools
+
+### Front-end Technologies
+
+* **HTML5:** HTML5 is used to structure the application's content using semantic elements.
+* **CSS3:** CSS3 is used to control the visual presentation of the application. Typography, colours, spacing, layout... 
+* **JavaScript:** JavaScript is used where client-side interaction improves the user experience.
+
+### Back-end Technologies
+
+* **Python:** Python is used as the primary back-end programming language. Custom functions and conditional logic are used where appropriate to implement application-specific behaviour.
+* **Django:** Django is the main web framework used to develop the full-stack application. The project follows Django conventions
+
+### Database
+
+* **PostgreSQL:** The application uses a relational database to store structured application data. PostgreSQL is intended for the production environment.
+
+### Third-party Services and APIs
+
+* **Stripe:** Stripe is used as the online payment processing service. It provides secure payment processing without requiring sensitive card information to be stored within the application's database.
+* **Google Maps:** Google Maps is used to provide location information to customers. The map is embedded within the contact/location section of the application.
+
+### Django Packages and Dependencies
+
+The project dependencies are maintained in a `requirements.txt` file.
+
+This ensures that the development and production environments can install the same required packages.
+
+Main packages used:
+
+* **psycopg2-binary:** PostgreSQL database adapter that allows Django to communicate with the production PostgreSQL database.
+* **pillow:** Handles image files uploaded to Django models, such as menu item and restaurant images.
+* **environs:** Loads and validates environment variables, allowing sensitive configuration such as secret keys, database credentials and API keys to be kept outside the source code.
+
+### Development Tools
+
+The project is developed using a combination of:
+
+* **Visual Studio Code**
+* **Browser Developer tools** used udring development to inspect:
+  * *HTML structure*
+  * *CSS behaviour*
+  * *Responsive layouts*
+  
+### Testing Tools
+
+A combination of automated and manual testing tools is used. Automated tests are used to verify application functionality, while manual testing is used for usability, accessibility and visual behaviour.
+
+Testing tools include:
+
+* Django automated test framework.
+* Python testing tools.
+* W3C HTML Validator.
+* W3C CSS Validator.
+* Lighthouse.
+* Browser Developer Tools.
+* Manual keyboard testing.
+* Responsive browser testing.
+
+### Version Control
+
+* **Git:** Git is used for version control throughout the development lifecycle.
+* **GitHub:** GitHub is used as the remote repository.
