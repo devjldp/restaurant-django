@@ -1,14 +1,24 @@
-# Designs.
-**note:** This design does not implement responsive design -> different sreen sizes devices. In your project you must design your pages for different sizes.  
+# Designs
 
-### Landing page.
-![Landing page](landing_page.png)
+* Iphone 17 wireframe was used for mobile design.  
+* Mackbook Pro 14" wirframe was used for desktop design.
 
-### Login page.  
-![Login page](login_page.png)  
+## Landing page
 
-### Signin page.  
-![Signup page](sign_up.png)
+![Landing page](landing_page_design.png)
 
-### Recover passwrod page.  
-![Reset Password page](reset_password_page.png)
+## Login page
+
+![Login page](login_page_design.png)  
+
+## Signup page
+
+![Signup page](signup_page_design.png)
+
+## Recover passwrod page
+
+![Reset Password page](reset_password_page_design.png)
+
+## Menu page
+
+![Menu page](menu_page_design.png)
