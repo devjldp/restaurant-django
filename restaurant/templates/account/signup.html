@@ -4,12 +4,47 @@
 {% block title %} | Sign Up {% endblock %}
 
 {% block content %}
-<form method="post" class="signup-form text-center mt-4">
-        <h2>Sign Up</h2>
+    <form method="post" class="d-flex flex-column justify-content-center mt-4 min-vh-60">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary w-auto px-4">Signup</button>
+        <h2 class="text-center mb-4 body-main-heading" >Sign Up</h2>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.username.id_for_label }}" class="form-label me-4 form-label-fixed"> Username </label> 
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.email.id_for_label }}" class="form-label me-4 form-label-fixed"> Email </label> 
+            {{ form.email }}
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.password1.id_for_label }}" class="form-label me-4 form-label-fixed"> Password </label> 
+            {{ form.password1 }}
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.password2.id_for_label }}" class="form-label me-4 form-label-fixed"> Repeat Password </label> 
+            {{ form.password2 }}
+        </div>
+
+        <div class="text-center mt-3">
+            <ol class="list-group list-group-numbered w-auto d-inline-block text-start">
+                <li class="list-group-item">Your password can't be too similar to your other personal information.</li>
+                <li class="list-group-item">Your password must contain at least 8 characters.</li>
+                <li class="list-group-item">Your password can't be a commonly used password.</li>
+                <li class="list-group-item">Your password can't be entirely numeric.</li>
+            </ol>
+        </div>
+            
+
+
+            <!-- {{ form.as_p }} -->
+        <div class="text-center mt-5">
+            <button type="submit" class="btn">Signup</button>
+        </div>
     </form>
+
     <p class="text-center mt-3">
         Already account? <a href="{% url 'account_login' %}">Log in here</a>
     </p>
