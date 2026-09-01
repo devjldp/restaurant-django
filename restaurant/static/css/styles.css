@@ -114,6 +114,12 @@
     font-weight: var(--font-weight-bold);
 }
 
+/* Aligns form labels and keeps input fields in the same position */
+.form-label-fixed {
+    width: 130px;
+    text-align: right;
+}
+
 .signup-form ul{
     list-style: none !important;
     padding: 0 !important;
