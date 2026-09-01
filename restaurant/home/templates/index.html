@@ -5,14 +5,41 @@
 {% block title %}| home {% endblock %}
 
 {% block content %}
-<h2 class="text-center lato">Welcome to Flavour Restaurant</h2>
-<div class="text-center">
-    <!-- here include and image  -->
-     <img src="{% static 'images/main_image.jpg' %}" class = "img-fluid mt-3"alt="Restaurant min image">
-</div>
-<div class="d-flex justify-content-around mt-5">
-    <p class="lato">Gourmet Experience</p>
-    <p class="lato">Gastronomic Experience</p>
-    <p class="lato">Cuisine Discovery</p>
-</div>
+<section class="container">
+
+    <h2 class="text-center body-main-heading mt-4">
+        Welcome to Flavour Restaurant
+    </h2>
+
+    <div class="text-center">
+        <img 
+            src="{% static 'images/main_image.jpg' %}" 
+            class="img-fluid mt-3"
+            alt="Flavour Restaurant"
+        >
+    </div>
+
+    <div class="row text-center mt-5 mb-3">
+
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
+            <h3 class="body-secondary-heading">
+                Gourmet Experience
+            </h3>
+        </div>
+
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
+            <h3 class="body-secondary-heading">
+                Gastronomic Experience
+            </h3>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <h3 class="body-secondary-heading">
+                Cuisine Discovery
+            </h3>
+        </div>
+
+    </div>
+
+</section>
 {% endblock %}

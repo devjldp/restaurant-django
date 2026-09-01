@@ -1,0 +1,38 @@
+/* import google fonts  */
+
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+
+/* css variables */
+:root{
+    /* colours */
+    --header-bg-colour: #40503F;
+    --header-text-colour: #FAFAFA;
+    --header-text-hoover-colour: #E0E0E0;
+
+    --footer-bg-colour: #40503F;
+    --footer-text-colour: #FAFAFA;
+    --footer-text-hoover-colour: #E0E0E0;
+
+    --button-bg-colour: #40503F;
+    --button-text-colour: #E0E0E0;
+    --button-bg-hover-colour: #E0E0E0;
+    --button-text-hover-colour: #40503F;
+    
+    /* fonts */
+    --font-family-brand: "Italianno", cursive;
+    --font-family-heading: "Playfair", serif;
+    --font-family-body: "Lato", sans-serif;
+
+    /* Font sizes */
+    --font-size-brand: 3rem;
+    --font-size-heading: 2rem;
+    --font-size-secondary-heading: 1.5rem;
+    --font-size-navigation: 1.2rem;
+    --font-size-body: 1rem;
+
+    /* Font weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+}

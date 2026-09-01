@@ -7,52 +7,114 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!-- Custom css  -->
     <link rel="stylesheet" href="{% static  'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static  'css/variables.css' %}">
     <!-- placeholder for extra css  -->
     {% block extra_css %} {% endblock %}
     <title>Flavour Restaurant {% block title %} {% endblock %}</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <!-- navigation bar -->
-    <header class="d-flex justify-content-around align-items-center p-3 bg-header">
-        <h1 class="m-0 lato">Flavour Restaurant</h1>
-        <nav>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="{% url 'home:index' %}" class="nav-link italiana" aria-label="Go to home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'menu:menu_list' %}" class="nav-link italiana" aria-label="Display menu">Menu</a>
-                </li>
-                {% if user.is_authenticated %}
-                    {% if user.is_superuser %}
-                    <!-- Show navigation bar for superuser  -->
-                    <li class="nav-item">
-                        <a href="{% url 'admin:index' %}" target="_blank" rel="noopener noreferrer" 
-                        class="nav-link italiana" aria-label="visit django admin site">Admin dashboard</a>
+<!-- <header class="bg-header"> -->
+    <nav class="navbar navbar-expand-lg bg-header">
+        <div class="container-fluid px-3">
+
+            <!-- Brand -->
+            <h1 class="text-center brand">Flavour Restaurant</h1>
+
+            <!-- Hamburger button -->
+            <button class="navbar-toggler" 
+                    type="button"
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#mainNavigation"
+                    aria-controls="mainNavigation"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation -->
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item mx-lg-3">
+                        <a href="{% url 'home:index' %}" 
+                           class="nav-link"
+                           aria-label="Go to home">
+                            Home
+                        </a>
                     </li>
+
+                    <li class="nav-item mx-lg-3">
+                        <a href="{% url 'menu:menu_list' %}" 
+                           class="nav-link"
+                           aria-label="Display menu">
+                            Menu
+                        </a>
+                    </li>
+
+                    <li class="nav-item mx-lg-3">
+                        <a href="#" 
+                           class="nav-link"
+                           aria-label="Book a table">
+                            Book a table
+                        </a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                        {% if user.is_superuser %}
+
+                            <!-- Superuser navigation -->
+                            <li class="nav-item mx-lg-3">
+                                <a href="{% url 'admin:index' %}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="nav-link"
+                                   aria-label="Visit Django admin site">
+                                    Admin dashboard
+                                </a>
+                            </li>
+
+                        {% else %}
+
+                            <!-- Customer navigation -->
+                            <li class="nav-item mx-lg-3">
+                                <a href="{% url 'cart:cart' %}"
+                                   class="nav-link"
+                                   aria-label="Go to your cart">
+                                    Cart
+                                </a>
+                            </li>
+
+                        {% endif %}
+
+                        <li class="nav-item mx-lg-3">
+                            <a href="{% url 'account_logout' %}"
+                               class="nav-link"
+                               aria-label="Log out">
+                                Log Out
+                            </a>
+                        </li>
+
                     {% else %}
-                      <!-- navigation for customers  -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link italiana" aria-label="Book a table">Book</a>
+
+                        <li class="nav-item mx-lg-3">
+                            <a href="{% url 'account_login' %}"
+                               class="nav-link italiana"
+                               aria-label="Log in">
+                                Log In
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{% url 'cart:cart' %}" class="nav-link italiana" aria-label="Go to your cart">cart</a>
-                        </li>
+
                     {% endif %}
-                        <li class="nav-item">
-                            <a href="{% url 'account_logout' %}" 
-                            class="nav-link italiana" aria-label="Log Out">Log Out</a>
-                        </li>
 
-                {% else %} 
-                    <li class="nav-item">
-                        <a href="{% url 'account_login' %}" class="nav-link italiana" aria-label="Log in">Log In</a>
-                    </li>
-                {% endif %}
+                </ul>
+            </div>
 
-            </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+    
+   
 
     <main class="flex-fill">
 
@@ -63,17 +125,18 @@
 
     </main>
     <!-- footer  -->
-        <footer class="d-flex justify-content-around align-items-center p-3 bg-header">
-        <div class = "col-4">
-            <h3 class="arvo">Flavour bistro, 2025</h3>
+    <footer class="d-flex flex-column flex-lg-row justify-content-lg-around align-items-center bg-footer">
+        <div class = "col-12 col-lg-4">
+            <h3 class="text-center brand">Flavour bistro, 2025</h3>
         </div>
 
-        <div class="col-4 text-center italiana">
-            <h3 class="m-0 mb-1">Opening times</h3>
-            <p class="m-1">M - Th: 12:00 - 15:00 | 18:00 - 23:00</p>
-            <p class="m-1">Fr - Sat: 12:00 - 23:00</p>
+        <div class="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
+            <h3 class="m-0 mb-1 footer-main-heading">Opening times</h3>
+            <p class="m-1 footer-text-body">M - Th: 12:00 - 15:00 | 18:00 - 23:00</p>
+            <p class="m-1 footer-text-body">Fr - Sat: 12:00 - 23:00</p>
         </div>
-        <div class="col-4 text-center">
+
+        <div class="col-12 col-lg-4 text-center">
             <ul class="d-flex justify-content-evenly">
                 <li class="list-group-item">
                     <a href="http://instagram.com" target="_blank" rel="noopener noreferrer"
@@ -89,8 +152,7 @@
                                 <path class="st0" d="M20,6h-8c-3.3,0-6,2.7-6,6v8c0,3.3,2.7,6,6,6h8c3.3,0,6-2.7,6-6v-8C26,8.7,23.3,6,20,6z M24.1,20   c0,2.3-1.9,4.1-4.1,4.1h-8c-2.3,0-4.1-1.9-4.1-4.1v-8c0-2.3,1.9-4.1,4.1-4.1h8c2.3,0,4.1,1.9,4.1,4.1V20z"/>
                             </g>
                         </svg>
-                    </a>
-                    
+                    </a>              
                 </li>
                 <li class="list-group-item">
                     <a href="http://facebook.com" target="_blank" rel="noopener noreferrer"

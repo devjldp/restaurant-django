@@ -1,37 +1,69 @@
-/* import google fonts  */
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Italiana&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
-
-
-
-.lato{
-    font-family: "Lato", sans-serif;
-}
-
-.italiana{
-    font-family: "Italiana", sans-serif;
-}
-
-.arvo{
-    font-family: "Arvo", serif;
-}
-
 /* header  */
 .bg-header{
-    background-color: #40503F;
-    color: #FAFAFA;
+    background-color: var(--header-bg-colour);
     position: sticky;
     top:0;
     z-index: 999;
 }
 
-.nav-link{
-    color: #FAFAFA;
+.brand {
+    font-family: var(--font-family-brand);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-brand);
+    color: var(--header-text-colour);
+}
+
+/* Navigation links */
+.nav-link {
+    font-family: var(--font-family-body);
+    color: var(--header-text-colour);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-navigation);
 }
 
 .nav-link:hover{
-    color:#c2c0c0;
+    color: var(--header-text-hoover-colour);
 }
+
+/* footer */
+
+.bg-footer {
+    background-color: var(--footer-bg-colour);
+    color: var(--footer-text-colour);
+}
+
+.footer-main-heading{
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-heading);
+}
+
+.footer-text-body{
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-body);
+}
+
+/* body*/
+
+.body-main-heading{
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-heading);
+    font-weight: var(--font-weight-bold);
+}
+
+.body-secondary-heading{
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-secondary-heading);
+    font-weight: var(--font-weight-medium);
+}
+
+.body-paragraph{
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-regualr);
+}
+
 
 .signup-form ul{
     list-style: none !important;
@@ -46,3 +78,26 @@
     margin: 0 !important;
 }
 
+
+
+
+
+
+
+
+
+/* Hamburger */
+
+.navbar-toggler {
+    border-color: var(--header-text-colour);
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Bootstrap hamburger icon */
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
