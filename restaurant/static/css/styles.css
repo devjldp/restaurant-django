@@ -1,3 +1,9 @@
+/* spacing */
+
+.min-vh-60 {
+    min-height: 60vh;
+}
+
 /* header  */
 .bg-header{
     background-color: var(--header-bg-colour);
@@ -25,6 +31,22 @@
     color: var(--header-text-hoover-colour);
 }
 
+/* Hamburger */
+
+.navbar-toggler {
+    border-color: var(--header-text-colour);
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Bootstrap hamburger icon */
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
 /* footer */
 
 .bg-footer {
@@ -44,7 +66,7 @@
     font-size: var(--font-size-body);
 }
 
-/* body*/
+/* body */
 
 .body-main-heading{
     font-family: var(--font-family-heading);
@@ -61,9 +83,36 @@
 .body-paragraph{
     font-family: var(--font-family-body);
     font-size: var(--font-size-body);
-    font-weight: var(--font-weight-regualr);
+    font-weight: var(--font-weight-regular);
 }
 
+/* buttons */
+
+.btn{
+    background-color: var(--button-bg-colour);
+    border: 1px solid #fff;
+    border-radius: 25px;
+    color: var(--button-text-colour);
+    font-family: var(--font-family-body);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    padding: 5px 20px;
+}
+
+.btn:hover{
+    background-color: var(--button-bg-hover-colour);
+    border: 1px solid var(--button-bg-colour);
+    border-radius: 25px;
+    color: var(--button-text-hover-colour);
+}
+
+/* form */
+
+.form-label{
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-secondary-heading);
+    font-weight: var(--font-weight-bold);
+}
 
 .signup-form ul{
     list-style: none !important;
@@ -86,18 +135,3 @@
 
 
 
-/* Hamburger */
-
-.navbar-toggler {
-    border-color: var(--header-text-colour);
-}
-
-.navbar-toggler:focus {
-    box-shadow: none;
-}
-
-/* Bootstrap hamburger icon */
-
-.navbar-toggler-icon {
-    filter: brightness(0) invert(1);
-}
