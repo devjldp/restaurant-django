@@ -1,15 +1,26 @@
 <!-- Inherti from base template -> extends -->
  {% extends 'base.html' %}
  {% block content %}
-   <form method="post" class="text-center mt-4">
-      <h2>Log In</h2>
+  <form method="post" class="d-flex flex-column justify-content-center mt-4 min-vh-60">
       {% csrf_token %}
-      {{ form.as_p }}
-      <!-- <label for="password">Introduce your password: </label> -->
-      <!-- {{ form.login }}: username  -->
-      <!-- {{ form.password }}: password -->
-      <button type="submit" class="btn btn-primary w-auto px-4">Log In</button>
-   </form>
-   <p class="text-center mt-3">Not registered <a href="{% url 'account_signup' %}">Sign up</a></p>
+
+      <h2 class="text-center mb-4 body-main-heading">Log In</h2>
+
+      <div class="mb-3 text-center"> 
+        <label for="{{ form.login.id_for_label }}" class="form-label me-4"> Username </label> 
+        {{ form.login }}
+      </div>
+
+      <div class="mb-3 text-center"> 
+        <label for="{{ form.password.id_for_label }}" class="form-label me-4"> Password </label>
+        {{ form.password }}
+      </div>
+
+      <div class="text-center">
+          <button type="submit" class="btn"> Log In </button>
+      </div>
+  </form>
+  <p class="text-center" >Do you need to recover your password? Please click <a href="{% url 'account_reset_password' %}">here</a></p>
+   <p class="text-center">Not registered <a href="{% url 'account_signup' %}">Sign up</a></p>
 
  {% endblock %}
