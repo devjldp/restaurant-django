@@ -48,8 +48,10 @@
     3. [Database](#database)
     4. [Third-party Services and APIs](#third-party-services-and-apis)
     5. [Development Tools](#development-tools)
-    6. [Testing Tools](#development-tools)
-    7. [Version Control](#development-tools)
+    6. [Testing Tools](#testing-tools)
+    7. [Version Control](#version-control)
+
+6. [Project Apps](#project-apps)
 
 ## Project Overview
 
@@ -700,9 +702,11 @@ Testing tools include:
 
 * Django automated test framework.
 * Python testing tools.
-* W3C HTML Validator.
-* W3C CSS Validator.
-* Lighthouse.
+* [W3C HTML Validator.](https://validator.w3.org/)
+* [W3C CSS Validator.](https://jigsaw.w3.org/css-validator/)
+* [Lighthouse.](https://developer.chrome.com/docs/lighthouse)
+* [JavaScript Validator.](https://jshint.com/)
+* [Python validator.](https://encode64.com/en/validators/python-validator)
 * Browser Developer Tools.
 * Manual keyboard testing.
 * Responsive browser testing.
@@ -711,3 +715,15 @@ Testing tools include:
 
 * **Git:** Git is used for version control throughout the development lifecycle.
 * **GitHub:** GitHub is used as the remote repository.
+
+### Project Apps
+
+| Django app | Main purpose | What it will contain | Main functionality | Main models / data | Access |
+| --- | --- | --- | --- | --- | --- |
+| **home** | Public-facing restaurant website | General restaurant content and pages that do not belong to a specific business domain | Homepage, About, Gallery, Contact, restaurant information, opening hours, location and navigation | Ideally no business models; static/public content where possible | Everyone |
+| **customers** | Customer accounts and profiles | Customer-specific information and account functionality | Registration, login, logout, profile creation, profile viewing/editing and customer account management | Django `User` + optional `CustomerProfile` | Anonymous + authenticated users, depending on functionality |
+| **menu** | Restaurant menu and food catalogue | The actual menu data and menu-related business logic | Display menu, filter/browse categories, display item details, prices, dietary information and availability | `Category`, `MenuItem` | Everyone can read; authorised management can modify |
+| **management** | Administrative dashboard | Protected interface for restaurant staff/admin users to manage restaurant operations | Dashboard, add/edit/delete menu items, manage bookings, view relevant orders, update operational information and monitor restaurant activity | Uses models from **menu**, **bookings** and potentially **orders**; should not duplicate them | Admin staff only |
+| **bookings** | Restaurant table reservations | Booking data, forms, validation and booking business logic | Create, view, update and cancel bookings; date/time validation; guest-number validation; booking status | `Booking` | Authenticated customers for their own bookings; admin for management |
+| **cart** | Temporary shopping basket | Logic required to build and manage a customer's basket before checkout | Add item, remove item, update quantity, calculate subtotal/total and review basket | Session-based cart or appropriate cart data structure | Customers / authenticated users as appropriate |
+| **orders** | Completed customer orders | Persistent order information created from the cart | Create order, store order items, calculate totals, display order history, order details and order status | `Order`, `OrderItem` | Authenticated customers for their own orders; admin for management |
