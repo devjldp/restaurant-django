@@ -34,8 +34,39 @@
             <!-- Navigation -->
             <div class="collapse navbar-collapse" id="mainNavigation">
                 <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated and user.is_superuser %}
+                        <!-- Superuser navigation -->
+                        <li class="nav-item mx-lg-3">
+                            <a href="#"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="nav-link"
+                               aria-label="Visit Django admin site">
+                               Admin dashboard
+                            </a>
+                        </li>
 
-                    <li class="nav-item mx-lg-3">
+                        <li class="nav-item mx-lg-3">
+                            <a href="{% url 'admin:index' %}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="nav-link"
+                               aria-label="Visit Django admin site">
+                               Django Admin dashboard
+                            </a>
+                        </li>
+
+                        <li class="nav-item mx-lg-3">
+                            <a href="{% url 'account_logout' %}"
+                               class="nav-link"
+                               aria-label="Log out">
+                                Log Out
+                            </a>
+                        </li>
+
+                    {% else %}
+                        <!-- Public & Customer Navigation -->
+                        <li class="nav-item mx-lg-3">
                         <a href="{% url 'home:index' %}" 
                            class="nav-link"
                            aria-label="Go to home">
@@ -60,40 +91,22 @@
                     </li>
 
                     {% if user.is_authenticated %}
+                        <!-- Customer options -->
+                        <li class="nav-item mx-lg-3">
+                            <a href="{% url 'cart:cart' %}"
+                               class="nav-link"
+                               aria-label="Go to your cart">
+                                Cart
+                            </a>
+                        </li>
 
-                        {% if user.is_superuser %}
-
-                            <!-- Superuser navigation -->
-                            <li class="nav-item mx-lg-3">
-                                <a href="{% url 'admin:index' %}"
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   class="nav-link"
-                                   aria-label="Visit Django admin site">
-                                    Admin dashboard
-                                </a>
-                            </li>
-
-                        {% else %}
-
-                            <!-- Customer navigation -->
-                            <li class="nav-item mx-lg-3">
-                                <a href="{% url 'cart:cart' %}"
-                                   class="nav-link"
-                                   aria-label="Go to your cart">
-                                    Cart
-                                </a>
-                            </li>
-
-                            <li class="nav-item mx-lg-3">
-                                <a href="{% url 'customers:create_profile' %}"
-                                   class="nav-link"
-                                   aria-label="Go to your cart">
-                                    Profile
-                                </a>
-                            </li>
-
-                        {% endif %}
+                        <li class="nav-item mx-lg-3">
+                            <a href="{% url 'customers:create_profile' %}"
+                               class="nav-link"
+                               aria-label="Go to your cart">
+                                Profile
+                            </a>
+                        </li>
 
                         <li class="nav-item mx-lg-3">
                             <a href="{% url 'account_logout' %}"
@@ -103,15 +116,16 @@
                             </a>
                         </li>
 
-                    {% else %}
+                        {% else %}
+                            <li class="nav-item mx-lg-3">
+                                <a href="{% url 'account_login' %}"
+                                    class="nav-link"
+                                    aria-label="Log in">
+                                    Log In
+                                </a>
+                            </li>
 
-                        <li class="nav-item mx-lg-3">
-                            <a href="{% url 'account_login' %}"
-                               class="nav-link italiana"
-                               aria-label="Log in">
-                                Log In
-                            </a>
-                        </li>
+                        {% endif %}
 
                     {% endif %}
 
