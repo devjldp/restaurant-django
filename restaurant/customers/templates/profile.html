@@ -1,14 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Profile</h3>
-{% if username %}
- {{ username }}
+<h2 class="text-center body-main-heading">Profile</h2>
+{% if user.is_authenticated %}
+    <p class="text-center body-paragraph text-primary"> 
+        Hi {{ user.username }},
+    </p>
 {% endif %}
-<form method="post">
+<form method="post" class="d-flex flex-column justify-content-center mt-4 min-vh-60">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Update</button>
+    <!-- {{ form.as_p }} -->
+    <div class="mb-3 d-flex justify-content-center align-items-center"> 
+        <label for="{{ form.first_name.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.first_name.label}} </label> 
+        {{ form.first_name }} 
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center align-items-center"> 
+        <label for="{{ form.last_name.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.last_name.label}} </label> 
+        {{ form.last_name }} 
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center align-items-center"> 
+        <label for="{{ form.street.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.street.label}} </label> 
+        {{ form.street }} 
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center align-items-center"> 
+        <label for="{{ form.city.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.city.label}} </label> 
+        {{ form.city }}
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center align-items-center"> 
+        <label for="{{ form.city.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.postal_code.label}} </label> 
+        {{ form.postal_code }}
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center align-items-center"> 
+        <label for="{{ form.city.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.phone_number.label}} </label> 
+        {{ form.phone_number }}
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn">Update</button>
+    </div>
 </form>
-<a href="{% url 'home:index' %}">Go back home</a>
+<div class="text-center my-3">
+    <a href="{% url 'home:index' %}" class="body-paragraph">Go back home</a>
+
+</div>
 {% endblock %}
+
