@@ -4,6 +4,21 @@
 {% block title %} | Sign Up {% endblock %}
 
 {% block content %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p><strong>{{ field.label }}:</strong> {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
     <form method="post" class="d-flex flex-column justify-content-center mt-4 min-vh-60">
         {% csrf_token %}
         <h2 class="text-center mb-4 body-main-heading" >Sign Up</h2>

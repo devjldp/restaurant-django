@@ -1,0 +1,24 @@
+{% load i18n %}
+{% load account %}
+
+{% autoescape off %}
+{% user_display user as user_display %}
+{% blocktranslate with site_name=current_site.name site_domain=current_site.domain %}
+
+Hello {{ user_display }},
+
+Thank you for registering with {{ site_name }}!
+
+To confirm your email address and activate your account, please click on the following link:
+
+{{ activate_url }}
+
+If you did not create an account with us, please ignore this email.
+
+Kind regards,
+The {{ site_name }} Team
+
+{% endblocktranslate %}
+
+{% endautoescape %}
+

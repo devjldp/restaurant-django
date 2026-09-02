@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -89,6 +90,13 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_LOGIN_METHODS = ['username','email']
 ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION ="mandatory"
+# for email verification
+# Default sender email address
+DEFAULT_FROM_EMAIL = 'flavour@admin.flavourfusion.com'
+
+# Customise or remove the subject prefix added by Allauth (defaults to [example.com])
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Flavour Fusion | '
+
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 
 ROOT_URLCONF = 'restaurant.urls'

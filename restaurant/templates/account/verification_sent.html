@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} | Verify Email {% endblock %}
+
+{% block content %}
+
+<h2 class="text-center body-main-heading mt-5">Please confirm your email!</h3>
+
+<div class="my-5 text-center body-paragraph">
+    <p> Thank you for signing up with Flavour Restaurant! </p>
+
+    <p> We have sent a verification email to your email address. </p>
+    
+    <p>Please check your inbox and click the link in the email to verify your account.</p>
+    
+    <p>If you don't see the email, please check your spam folder.</p>
+</div>
+    
+<div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">    
+    <a href="{% url 'account_login' %}" class="w-auto btn my-5 my-lg-0 mx-lg-5">Log in here</a>
+    <a href="{% url 'account_signup' %}"class="w-auto btn my-5 my-lg-0 mx-lg-5">Sign up</a></p>
+</div>
+
+
+{% endblock %}
