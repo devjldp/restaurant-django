@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Dishes in the restaurant</h2>
-    {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-    {% endif %}
-    {% if menu %}
-        <ul>
-            {% for dish in menu %}
-                <li class="list-group-item">{{ dish.name|capfirst }}</li>
-                <a href="{% url 'management:update_dish' dish.id %}">Update</a>
-                <a href="{% url 'management:delete_dish' dish.id %}">Delete</a>
-            {% endfor %}
-        </ul>
+    <h2 class="text-center my-4 body-main-heading">Dishes in the restaurant</h2>
 
+    {% if menu %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle"> 
+            <thead>
+                <tr>
+                    <th>Dish Name</th>
+                    <th colspan="2" class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for dish in menu %}
+                <tr>
+                    <td>{{ dish.name|capfirst }}</td>
+                    <td class="text-center"><a href="{% url 'management:update_dish' dish.id %}">Update</a></td>
+                    <td class="text-center"><a href="{% url 'management:delete_dish' dish.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% else %}
         <p>There is not dishes in the database.</p>
     {% endif %}
 
-    <a href="{%url 'management:add_dish' %}">Add a new dish</a><br>
-    <a href="{% url 'management:home' %}">Go back Dashboard</a>
+        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center my-5">    
+        <a href="{%url 'management:add_dish' %}" class="btn mx-lg-5">Add a new dish</a>
+        <a href="{% url 'management:home' %}" class="btn mx-lg-5">Go back Dashboard</a>
+    </div>
+
 {% endblock %}
