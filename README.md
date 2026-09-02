@@ -865,12 +865,15 @@ The bookings application is responsible for restaurant reservations. We have onl
 | Field | Type | Key / Constraint | Purpose |
 | --- | --- | --- | --- |
 | `id` | Integer | PK | Unique booking identifier |
-| `user` | ForeignKey | `FK → User` | Customer who made the booking |
+| `user` | ForeignKey | `FK → User` (Optional, `null=True`) | Customer account (if logged in) |
+| `name` | String | Required (max 100) | Name of the person making the reservation |
+| `email` | Email | Required | Contact email address |
+| `phone_number` | String | Required (max 20) | Contact phone number |
 | `booking_date` | Date | Required | Date of reservation |
 | `booking_time` | Time | Required | Requested reservation time |
-| `number_of_guests` | Integer | Required, > 0 | Number of people attending |
+| `number_of_guests` | Integer | Required, 1 - 12 | Number of people attending |
 | `special_requests` | Text | Optional | Customer's additional requirements |
-| `status` | Choice | Default e.g. `pending`, `confirmed`, `completed`, `cancelled` | Booking status |
+| `status` | Choice | Default `pending` | Options: `pending`, `confirmed`, `completed`, `cancelled` |
 | `created_at` | DateTime | Auto-created | Date the booking was created |
 | `updated_at` | DateTime | Auto-updated | Date the booking was last changed |
 
