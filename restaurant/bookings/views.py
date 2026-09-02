@@ -1,3 +1,50 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import BookingForm
+from .models import Booking
 
 # Create your views here.
+
+def create_booking(request):
+    """
+    Handle table reservation requests.
+
+    Pre-fills contact details if the user is authenticated and processes
+    the booking form submission.
+    """
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            if request.user.is_authenticated:
+                booking.user = request.user
+            booking.save()
+            
+            messages.success(
+                request, 
+                'Your table reservation request has been submitted successfully!'
+            )
+            return redirect('bookings:create_booking', booking_id=booking.id)
+        else:
+            messages.error(
+                request, 
+                'There was an error with your submission. Please check the form and try again.'
+            )
+    else:
+        initial_data = {}
+        if request.user.is_authenticated:
+            initial_data['email'] = request.user.email
+            
+            # Pre-populate name and phone from CustomerProfile if available
+            if hasattr(request.user, 'profile'):
+                profile = request.user.profile
+                full_name = f"{profile.first_name or ''} {profile.last_name or ''}".strip()
+                initial_data['name'] = full_name or request.user.username
+                initial_data['phone_number'] = getattr(profile, 'phone_number', '')
+            else:
+                initial_data['name'] = request.user.username
+
+        form = BookingForm(initial=initial_data)
+
+    return render(request, 'booking.html', {'form': form})

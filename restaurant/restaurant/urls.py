@@ -33,7 +33,8 @@ urlpatterns = [
     path('redirect_post_login/', post_login_redirect, name='post-loging-redirect'),
     path('cart/', include('cart.urls')),
     path('profile/', include('customers.urls')),
-    path('orders/', include('orders.urls'))
+    path('orders/', include('orders.urls')),
+    path('bookings/', include('bookings.urls')),
 ]
 
 # Only for development
