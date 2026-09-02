@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container my-5">
     <div class="row">
         <div class="col-md-6">
             <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
@@ -9,13 +9,15 @@
         <div class="col-md-6">
             <h2 class="text-center">{{ item.name }}</h1>
             <p>{{ item.description }}</p>
-            <p class="h3 text-success text-center">£{{ item.price }}</p>
+            <p class="h3 text-success text-center"><span class="text-primary">Price: </span>£{{ item.price }}</p>
             <ul class="text-center">
                 {% for ingredient in ingredients %}
                     <li class="list-group-item">{{ingredient.name}}</li>
                 {% endfor %}
             </ul>
-            <a href="{% url 'menu:menu_list' %}" class="btn btn-secondary">← Go back menu</a>
+            <div class="text-center">
+                <a href="{% url 'menu:menu_list' %}" class="btn btn-secondary">← Go back menu</a>
+            </div>
         </div>
     </div>
 </div>
