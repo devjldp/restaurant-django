@@ -50,3 +50,18 @@ def user_bookings(request):
     """
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'user_bookings.html', {'bookings': bookings})
+
+@login_required
+def cancel_booking(request, booking_id):
+    """
+    Allow an authenticated customer to cancel their own reservation.
+    """
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+
+    if request.method == 'POST':
+        booking.status = 'cancelled'
+        booking.save()
+        messages.success(request, 'Your reservation has been cancelled successfully.')
+        return redirect('bookings:user_bookings')
+
+    return render(request, 'booking_cancel_confirm.html', {'booking': booking})
