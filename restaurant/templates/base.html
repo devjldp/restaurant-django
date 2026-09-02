@@ -85,6 +85,14 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item mx-lg-3">
+                                <a href="{% url 'customers:create_profile' %}"
+                                   class="nav-link"
+                                   aria-label="Go to your cart">
+                                    Profile
+                                </a>
+                            </li>
+
                         {% endif %}
 
                         <li class="nav-item mx-lg-3">
@@ -115,7 +123,18 @@
    
     <main class="flex-fill">
 
-
+        {% if messages %}
+            <div class="row mt-3">
+                <div class="col-12">
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
         {% block content %}
         {% endblock %}
 
