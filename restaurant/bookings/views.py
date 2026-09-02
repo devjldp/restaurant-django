@@ -21,16 +21,10 @@ def create_booking(request):
                 booking.user = request.user
             booking.save()
             
-            messages.success(
-                request, 
-                'Your table reservation request has been submitted successfully!'
-            )
+            messages.success( request, 'Your table reservation request has been submitted successfully!')
             return redirect('bookings:create_booking', booking_id=booking.id)
         else:
-            messages.error(
-                request, 
-                'There was an error with your submission. Please check the form and try again.'
-            )
+            messages.error(request, 'There was an error with your submission. Please check the form and try again.')
     else:
         initial_data = {}
         if request.user.is_authenticated:
@@ -48,3 +42,11 @@ def create_booking(request):
         form = BookingForm(initial=initial_data)
 
     return render(request, 'booking.html', {'form': form})
+
+@login_required
+def user_booking(request):
+    """
+        Display a list of upcoming and past reservations for the authenticated customer.
+    """
+    bookings = Booking.objects.filter(user=request.user)
+    return render(request, 'user_bookings.html', {'bookings': bookings})
