@@ -5,7 +5,7 @@ from django.db import DatabaseError
 
 
 # Import the models we are going to use
-from .models import MenuItem
+from .models import MenuItem, Category
 # from home.models import  => importing form a different app
 
 # Create your views here.
@@ -19,16 +19,21 @@ def select_all_menu(request):
         # connection to the databse
         # cursor....
         dishes = MenuItem.objects.all()
+        categories = Category.objects.all()
         # var1 = data from table1
         # var2 = data from table2
         # for debugging
         print(f"Retrieved {dishes.count()} from Database")
+        print(f"Retrieved {categories.count()} from Database")
+        
     except DatabaseError as e:
         print(f"There is an error in the query. Error: {e}")
         dishes = []
+        categories = []
     
     context = {
         'menu': dishes,
+        'categories': categories
         #'customer' : var1
         #'order' : var2
     }
