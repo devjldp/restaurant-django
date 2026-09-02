@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+
 #import messages
 from django.contrib import messages
 
@@ -13,7 +15,7 @@ from menu.forms import MenuItemForm, UpdatePriceForm
 @login_required
 def post_login_redirect(request):
     """
-    Redirectusers based on their role.
+    Redirect users based on their role.
     """
     user = request.user
     # If statement to redirect user
@@ -32,7 +34,15 @@ def management_home(request):
     """
     if not request.user.is_superuser:
         return redirect('home:index')
-    return render(request, 'dashboard.html')
+
+
+    dashboard_items = [
+        {"item": "menu", "image_url": "management/images/admin_menu.png", "url": reverse("management:list_dishes")},
+        {"item": "bookings", "image_url": "management/images/admin_bookings.png", "url": "#"},
+        {"item": "orders", "image_url": "management/images/admin_orders.png", "url": "#" },
+        {"item": "customers", "image_url": "management/images/admin_users.png", "url": "#"}
+    ]    
+    return render(request, 'dashboard.html', {'dashboard_items':dashboard_items})
 
 
 # Implement the CRUD using Django ORM

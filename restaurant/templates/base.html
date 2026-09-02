@@ -37,7 +37,7 @@
                     {% if user.is_authenticated and user.is_superuser %}
                         <!-- Superuser navigation -->
                         <li class="nav-item mx-lg-3">
-                            <a href="#"
+                            <a href="{% url 'management:home' %}"
                                target="_blank"
                                rel="noopener noreferrer"
                                class="nav-link"
