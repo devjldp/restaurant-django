@@ -22,7 +22,7 @@ def create_booking(request):
             booking.save()
             
             messages.success( request, 'Your table reservation request has been submitted successfully!')
-            return redirect('bookings:create_booking', booking_id=booking.id)
+            return redirect('bookings:user_bookings')
         else:
             messages.error(request, 'There was an error with your submission. Please check the form and try again.')
     else:
@@ -44,7 +44,7 @@ def create_booking(request):
     return render(request, 'booking.html', {'form': form})
 
 @login_required
-def user_booking(request):
+def user_bookings(request):
     """
         Display a list of upcoming and past reservations for the authenticated customer.
     """
