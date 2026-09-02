@@ -739,7 +739,7 @@ Testing tools include:
 | --- | --- | --- | --- | --- | --- |
 | **home** | Public-facing restaurant website | General restaurant content and pages that do not belong to a specific business domain | Homepage, About, Gallery, Contact, restaurant information, opening hours, location and navigation | Ideally no business models; static/public content where possible | Everyone |
 | **customers** | Customer accounts and profiles | Customer-specific information and account functionality | Registration, login, logout, profile creation, profile viewing/editing and customer account management | Django `User` + optional `CustomerProfile` | Anonymous + authenticated users, depending on functionality |
-| **menu** | Restaurant menu and food catalogue | The actual menu data and menu-related business logic | Display menu, filter/browse categories, display item details, prices, dietary information and availability | `Category`, `MenuItem` | Everyone can read; authorised management can modify |
+| **menu** | Restaurant menu and food catalogue | The actual menu data and menu-related business logic | Display menu, filter/browse categories, display item details, prices, dietary information and availability | `Category`, `MenuItem`, `Ingredient` | Everyone can read; authorised management can modify |
 | **management** | Administrative dashboard | Protected interface for restaurant staff/admin users to manage restaurant operations | Dashboard, add/edit/delete menu items, manage bookings, view relevant orders, update operational information and monitor restaurant activity | Uses models from **menu**, **bookings** and potentially **orders**; should not duplicate them | Admin staff only |
 | **bookings** | Restaurant table reservations | Booking data, forms, validation and booking business logic | Create, view, update and cancel bookings; date/time validation; guest-number validation; booking status | `Booking` | Authenticated customers for their own bookings; admin for management |
 | **cart** | Temporary shopping basket | Logic required to build and manage a customer's basket before checkout | Add item, remove item, update quantity, calculate subtotal/total and review basket | Session-based cart or appropriate cart data structure | Customers / authenticated users as appropriate |
@@ -779,6 +779,8 @@ The `customers` application manages customer-specific functionality.
 
 Django's built-in authentication system provides the core User model for registration, authentication and authorisation. Where additional customer information is required, a separate `customer profile` model can be associated with the user through a one-to-one relationship.
 
+* `CustomerProfile`: Stores delivery and contact details linked directly to a Django user account.
+
 *`User model`*
 
 | Field | Type | Key / Constraint | Purpose |
@@ -787,8 +789,6 @@ Django's built-in authentication system provides the core User model for registr
 | `username` | String | Unique | Customer's login name |
 | `email` | Email | Unique/optional depending on implementation | Customer email address |
 | `password` | String | Required | Securely hashed password |
-| `first_name` | String | Optional | Customer's first name |
-| `last_name` | String | Optional | Customer's surname |
 | `is_superuser` | Boolean | Default `False` | Identifies administrator accounts |
 | `is_active` | Boolean | Default `True` | Determines whether the account is active |
   
@@ -798,8 +798,12 @@ Django's built-in authentication system provides the core User model for registr
 | --- | --- | --- | --- |
 | `id` | Integer | PK | Unique profile identifier |
 | `user` | One-to-One | `FK → User`, Unique | Links the profile to one account |
+| `first_name` | String | Optional (max50) | Customer's first name |
+| `last_name` | String | Optional (max50) | Customer's surname |
+| `street` | String | Required (max 250) | Street address for delivery |
+| `city` | String | Required (max 100) | City for delivery |
+| `postal_code` | String | Required (max 25) | Postal/zip code for delivery |
 | `phone_number` | String | Optional | Customer contact number |
-| `address` | Text/String | Optional | Customer address if required |
 | `created_at` | DateTime | Auto-created | Records when the profile was created |
 | `updated_at` | DateTime | Auto-updated | Records the latest profile modification |
 
@@ -810,6 +814,7 @@ The menu application is responsible for the restaurant's menu data.
 The main models are:
 
 * `Category`: Represents a logical grouping of menu items, such as starters, main courses, desserts or drinks.
+* `Ingredient`: Represents individual ingredients that can be reused across multiple dishes.
 * `MenuItem`: Represents an individual item available on the restaurant menu.
 
 *`Category model`*
@@ -817,21 +822,37 @@ The main models are:
 | Field | Type | Key / Constraint | Purpose |
 | --- | --- | --- | --- |
 | `id` | Integer | PK | Unique category identifier |
-| `name` | String | Required, Unique | Category name, e.g. Starters or Desserts |
-| `description` | Text | Optional | Short explanation of the category |
+| `name` | String | Required, Unique (max 150) | Category name, e.g. Starters or Desserts |
+| `display_order` | Integer | Default `0` | Controls display sequence on the menu |
+| `is_active` | Boolean | Default `True` | Allows hiding a category without deleting data |
+| `created_at` | DateTime | Auto-created | Date and time the category was added |
+| `updated_at` | DateTime | Auto-updated | Date and time the category was last changed |
 
-*`Category model`*
+*`Ingredient model`*
+
+| Field | Type | Key / Constraint | Purpose |
+| --- | --- | --- | --- |
+| `id` | Integer | PK | Unique ingredient identifier |
+| `name` | String | Required, Unique (max 150) | Ingredient name |
+| `created_at` | DateTime | Auto-created | Date and time the ingredient was added |
+| `updated_at` | DateTime | Auto-updated | Date and time the ingredient was last changed |
+
+*`MenuItem model`*
 
 | Field | Type | Key / Constraint | Purpose |
 | --- | --- | --- | --- |
 | `id` | Integer | PK | Unique menu item identifier |
-| `category` | ForeignKey | `FK → Category` | Associates item with a category |
-| `name` | String | Required | Name of the dish |
+| `category` | ForeignKey | `FK → Category` (`PROTECT`) | Associates item with a category |
+| `name` | String | Required (max 150) | Name of the dish |
 | `description` | Text | Required | Description of the dish |
-| `price` | Decimal | Required, > 0 | Current selling price |
-| `image` | Image/File | Optional | Dish image |
+| `price` | Decimal | Required, >= 0.01 | Current selling price |
+| `calories` | Integer | Default `0` | Nutritional value in calories |
+| `ingredients` | ManyToMany | `M2M → Ingredient`, Optional | Ingredients associated with the dish |
+| `is_vegetarian` | Boolean | Default `False` | Identifies vegetarian choices |
+| `is_vegan` | Boolean | Default `False` | Identifies vegan choices |
 | `is_available` | Boolean | Default `True` | Indicates whether the item can currently be ordered |
-| `dietary_information` | String/Text | Optional | Dietary/allergen information |
+| `is_available_delivery` | Boolean | Default `True` | Indicates whether the item is available for delivery |
+| `image` | Image/File | Optional | Dish image |
 | `created_at` | DateTime | Auto-created | Date the item was added |
 | `updated_at` | DateTime | Auto-updated | Date the item was last changed |
 
