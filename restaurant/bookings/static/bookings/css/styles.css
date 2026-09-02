@@ -1,0 +1,5 @@
+.table.table-hover .table-header th {
+    background-color: var(--header-bg-colour) !important;
+    color: var(--header-text-colour) !important;
+}
+

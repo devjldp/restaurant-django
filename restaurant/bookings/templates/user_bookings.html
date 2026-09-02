@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'bookings/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container my-5">
+    <h2 class="mb-4 body-main-heading">My Reservations</h2>
+
+    {% if bookings %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle shadow-sm">
+                <thead class="table-header">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Guests</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking.booking_date|date:"d M Y" }}</td>
+                            <td>{{ booking.booking_time|time:"H:i" }}</td>
+                            <td>{{ booking.number_of_guests }}</td>
+                            <td>
+                                {% if booking.status == 'confirmed' %}
+                                    <span class="badge bg-success">Confirmed</span>
+                                {% elif booking.status == 'pending' %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% elif booking.status == 'cancelled' %}
+                                    <span class="badge bg-danger">Cancelled</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">{{ booking.get_status_display }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if booking.status != 'cancelled' %}
+                                    <a href="#" class="btn btn-sm btn-outline-danger">
+                                        Cancel
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted small">N/A</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            <p class="mb-2">You currently have no table reservations.</p>
+            <a href="{% url 'bookings:create_booking' %}" class="btn btn-primary btn-sm">Make a Reservation</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
