@@ -234,7 +234,7 @@ The stories are organised around the main user roles:
 * Customer. The customer stories focus primarily on discovering the restaurant, browsing its content, managing bookings and completing purchases.
 * Restaurant administrator. The administrator stories focus on managing application data and supporting the restaurant's day-to-day operations.
 
-The complete user story documentation is included within the project's design documentation. [User Stories](documentation/user_experience/user_stories/user_stories.xlsx)
+The complete user story documentation is included within the project's design documentation. [User Stories](documentation/user_experience/user_stories/flavour_user_stories.xlsx)
 
 ### User Requirements
 
