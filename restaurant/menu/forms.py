@@ -2,6 +2,13 @@
 from django import forms
 from .models import MenuItem, Ingredient, Category
 
+# Form to add a new Ingredient
+class IngredientForm(forms.ModelForm):
+
+    class Meta:
+        model = Ingredient
+        fields = ['name']
+
 # Form to add a new dish
 class MenuItemForm(forms.ModelForm):
     
@@ -15,8 +22,8 @@ class MenuItemForm(forms.ModelForm):
         
         widgets = {
             'description': forms.Textarea(attrs={'rows':4}),
-            'price': forms.NumberInput(attrs={'step':'0.01'}),
-            'ingredients':forms.CheckboxSelectMultiple(),
+            'price': forms.NumberInput(attrs={'step':'0.01', 'min':'0.01'}),
+            'calories': forms.NumberInput(attrs={'min': '0'}),
         }
         
 # Create the form to update the price -> field price
