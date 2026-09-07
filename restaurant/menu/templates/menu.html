@@ -44,7 +44,7 @@
                                         
                                         <!-- Content section -->
                                         <div class="card-body d-flex flex-column p-3">
-                                            <h5 class="card-title mb-2 italiana">{{ item.name }}</h5>
+                                            <h5 class="card-title mb-2 italiana">{{ item.name|capfirst }}</h5>
                                             <p class="card-text text-start fs-6 flex-grow-1 text-muted lato">{{ item.description }}</p>
                                             <p class="card-text mb-3"><strong class="h6 text-success">Price: £{{ item.price }}</strong></p>
                                             
