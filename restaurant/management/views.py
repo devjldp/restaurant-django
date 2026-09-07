@@ -5,8 +5,9 @@ from django.urls import reverse
 #import messages
 from django.contrib import messages
 
-# import MenuItem model from menu app
+# import models:
 from menu.models import MenuItem
+from bookings.models import Booking
 
 # import forms from menu app
 from menu.forms import MenuItemForm
@@ -38,7 +39,7 @@ def management_home(request):
 
     dashboard_items = [
         {"item": "menu", "image_url": "management/images/admin_menu.png", "url": reverse("management:list_dishes")},
-        {"item": "bookings", "image_url": "management/images/admin_bookings.png", "url": "#"},
+        {"item": "bookings", "image_url": "management/images/admin_bookings.png", "url": reverse("management:list_reservations")},
         {"item": "orders", "image_url": "management/images/admin_orders.png", "url": "#" },
         {"item": "customers", "image_url": "management/images/admin_users.png", "url": "#"}
     ]    
@@ -46,7 +47,8 @@ def management_home(request):
 
 
 # Implement the CRUD using Django ORM
-# view to render all dishes - only the name of the dish
+
+# Menu management CRUD 
 
 @login_required
 def management_select_all_dishes(request):
@@ -91,7 +93,6 @@ def management_add_dish(request):
         form = MenuItemForm()
     return render(request, 'dashboard_add_dish.html', {'form': form })
 
-
 @login_required
 def management_delete_dish(request, dish_id):
     """
@@ -115,6 +116,7 @@ def management_delete_dish(request, dish_id):
 
 @login_required
 def management_update_dish(request, dish_id):
+
     dish = get_object_or_404(MenuItem, id=dish_id)
 
     if request.method == 'POST':
@@ -138,3 +140,21 @@ def management_update_dish(request, dish_id):
     #     'dish':dish
     # }
     return render(request, 'dashboard_update_dish.html', {'form':form, 'dish':dish})
+
+# Bookins management CRUD
+
+@login_required
+def management_display_reservations(request):
+    # Get all object(books) in the system   
+    # Use try and except to improve how to handle errors
+    try:
+        reservations = Booking.objects.all()
+        print(reservations)
+    except Exception as e:
+        print(f"There is an error retrieving data: {e}")
+
+    context = {
+        'reservations': reservations
+    }
+
+    return render(request, 'dashboard_reservations.html', context)

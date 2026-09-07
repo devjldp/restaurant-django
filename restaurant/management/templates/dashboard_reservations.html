@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="text-center my-4 body-main-heading">Reservations</h2>
+
+    {% if reservations %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle"> 
+            <thead>
+                <tr>
+                    <th>Customer name</th>
+                    <th colspan="2">Date | time</th>
+                    <th>Number of guests booked </th>
+                    <th>Status</th>
+                    <th colspan="2" class="text-center">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.name|capfirst }}</td>
+                    <td>{{ reservation.booking_date }}</td>
+                    <td>{{ reservation.booking_time }}</td>
+                    <td>{{ reservation.number_of_guests }}</td>
+                    <td>{{ reservation.status }}</td>
+                    <td class="text-center"><a href="#">Update</a></td>
+                    <td class="text-center"><a href="#">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>There are not reservations in the System.</p>
+    {% endif %}
+        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center my-5">    
+        <a href="{% url 'management:home' %}" class="btn mx-lg-5">Go back Dashboard</a>
+    </div>
+
+{% endblock %}
