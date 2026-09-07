@@ -11,5 +11,6 @@ app_name = 'menu'
 urlpatterns = [
     path('', views.select_all_menu, name='menu_list'),
     # define more paths - urls
-    path('<int:dish_id>/', views.menu_detail, name='menu_detail')
+    path('<int:dish_id>/', views.menu_detail, name='menu_detail'),
+    path('ingredients/search/', views.search_ingredients, name='search_ingredients')
 ]

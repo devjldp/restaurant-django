@@ -2,10 +2,10 @@ from django.shortcuts import render
 
 # import errors:
 from django.db import DatabaseError
-
+from django.http import JsonResponse
 
 # Import the models we are going to use
-from .models import MenuItem, Category
+from .models import MenuItem, Category, Ingredient
 # from home.models import  => importing form a different app
 
 # Create your views here.
@@ -63,3 +63,46 @@ def menu_detail(request, dish_id):
     }
 
     return render(request, 'menu_detail.html', context)
+
+def search_ingredients(request):
+    """
+    Search for ingredients whose name contains the search term.
+
+    The search term is received through the 'q' GET parameter.
+    The function returns a maximum of 30 matching ingredients
+    as a JSON response.
+
+    Args:
+        request: HTTP request containing the search query.
+
+    Returns:
+        JsonResponse: A JSON list containing the ID and name
+        of each matching ingredient. If a database error occurs,
+        an error message is returned as JSON.
+    """
+    query = request.GET.get('q', '').strip()
+
+    try:
+        ingredients = Ingredient.objects.filter(
+            name__icontains=query
+        ).order_by('name')[:30]
+
+        results = [
+            {
+                'id': ingredient.id,
+                'name': ingredient.name,
+            }
+            for ingredient in ingredients
+        ]
+
+        return JsonResponse(results, safe=False)
+
+    except DatabaseError as e:
+        print(f"There is an error searching for ingredients: {e}")
+
+        return JsonResponse(
+            {
+                'error': 'There was an error searching for ingredients.'
+            },
+            status=500
+        )    
