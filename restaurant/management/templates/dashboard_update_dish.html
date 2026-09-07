@@ -2,24 +2,73 @@
 
 {% block content %}
 
-    <h2>Update a dish</h2>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+    <h2 class="text-center my-4 body-main-heading">Update a dish</h2>
 
     {% if dish %}
-        <h3>{{ dish.name }}</h3>
+        <h3 class="text-center body-secondary-heading">{{ dish.name }}</h3>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="d-flex flex-column justify-content-center mt-4 min-vh-60">
         {% csrf_token %}
-        {{ form.as_p }} <!-- This command renders the form -->
-        <button type="submit">Update dish</button>
+        <!-- {{ form.as_p }} This command renders the form -->
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.name.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.name.label}} </label> 
+            {{ form.name }} 
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.description.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.description.label}} </label> 
+            {{ form.description }} 
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.price.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.price.label}} </label> 
+            {{ form.price }} 
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.calories.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.calories.label}} </label> 
+            {{ form.calories }} 
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.category.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.category.label}} </label> 
+            {{ form.category }} 
+            <a href="#" class="mx-5">Add new  category</a>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.is_vegetarian.id_for_label }}" class="form-label me-4 form-label-fixed"> Vegetarian </label>
+            {{ form.is_vegetarian }} 
+        </div>
+        
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.is_vegan.id_for_label }}" class="form-label me-4 form-label-fixed"> {{form.is_vegan.label}} </label> 
+            {{ form.is_vegan }} 
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.is_available.id_for_label }}" class="form-label me-4 form-label-fixed"> Restaurant Availability </label>
+            {{ form.is_available }} 
+        </div>
+        
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.is_available_delivery.id_for_label }}" class="form-label me-4 form-label-fixed"> Delivery Availability </label>
+            {{ form.is_available_delivery }} 
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center"> 
+            <label for="{{ form.image.id_for_label }}" class="form-label me-4 form-label-fixed mb-0"> {{ form.image.label }}  </label> 
+            {{ form.image }} 
+        </div>
+
+        <div class="text-center my-5">
+            <button type="submit" class="btn">Update dish</button>
+            <a href="{% url 'management:home' %}" class="btn">Cancel</a>
+        </div>
     </form>
-
-    <a href="{% url 'management:home' %}">Cancel</a>
-
-{% endblock %}
+    
+    
+    
+    {% endblock %}
+    
