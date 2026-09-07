@@ -66,12 +66,9 @@
             <label for="{{ form.ingredients.id_for_label }}" class="form-label me-4 form-label-fixed"> {{ form.image.label }}  </label><br> 
             {{ form.image }} 
         </div>
-
-        
-
-
-
-        <button type="submit" class="btn">Add a new dish</button>
+        <div class="text-center">
+            <button type="submit" class="btn">Add a new dish</button>
+        </div>
     </form>
 
     <a href="{%url 'management:home' %}">Go back dashboard</a>
@@ -82,6 +79,8 @@
 
 <script>
     const searchIngredientsUrl = "{% url 'menu:search_ingredients' %}";
+    const createIngredientUrl = "{% url 'menu:create_ingredient' %}";
+    const csrfToken = "{{ csrf_token }}";
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.6.2/dist/js/tom-select.complete.min.js"></script>

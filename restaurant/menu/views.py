@@ -4,9 +4,14 @@ from django.shortcuts import render
 from django.db import DatabaseError
 from django.http import JsonResponse
 
+# import forms
+from .forms import IngredientForm
+
 # Import the models we are going to use
 from .models import MenuItem, Category, Ingredient
 # from home.models import  => importing form a different app
+
+
 
 # Create your views here.
 def select_all_menu(request):
@@ -106,3 +111,46 @@ def search_ingredients(request):
             },
             status=500
         )    
+
+def create_ingredient(request):
+    """
+    Create a new ingredient and return its data as JSON.
+
+    Args:
+        request: HTTP request containing the new ingredient name.
+
+    Returns:
+        JsonResponse: The ID and name of the newly created ingredient,
+            or validation/database errors.
+    """
+    if request.method != 'POST':
+        return JsonResponse(
+            {'error': 'Only POST requests are allowed.'},
+            status=405
+        )
+
+    form = IngredientForm(request.POST)
+
+    if not form.is_valid():
+        return JsonResponse(
+            {'errors': form.errors},
+            status=400
+        )
+
+    try:
+        ingredient = form.save()
+
+        return JsonResponse({
+            'id': ingredient.id,
+            'name': ingredient.name,
+        }, status=201)
+
+    except DatabaseError as e:
+        print(f"There is an error creating the ingredient: {e}")
+
+        return JsonResponse(
+            {
+                'error': 'There was an error creating the ingredient.'
+            },
+            status=500
+        )
