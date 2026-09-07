@@ -9,7 +9,7 @@ from django.contrib import messages
 from menu.models import MenuItem
 
 # import forms from menu app
-from menu.forms import MenuItemForm, UpdatePriceForm
+from menu.forms import MenuItemForm
 
 # Create your views here.
 @login_required
@@ -118,7 +118,7 @@ def management_update_dish(request, dish_id):
     dish = get_object_or_404(MenuItem, id=dish_id)
 
     if request.method == 'POST':
-        form = UpdatePriceForm(request.POST, instance=dish)
+        form = MenuItemForm(request.POST, request.FILES, instance=dish)
         # check if your form is valid
         if form.is_valid():
             try:
@@ -131,7 +131,7 @@ def management_update_dish(request, dish_id):
         else:
             messages.warning(request, "Please correct the mistakes you have in the form.")
     else:
-        form = UpdatePriceForm()
+        form = MenuItemForm(instance=dish)
     
     # context ={
     #     'form':form,

@@ -25,10 +25,3 @@ class MenuItemForm(forms.ModelForm):
             'price': forms.NumberInput(attrs={'step':'0.01', 'min':'0.01'}),
             'calories': forms.NumberInput(attrs={'min': '0'}),
         }
-        
-# Create the form to update the price -> field price
-
-class UpdatePriceForm(forms.ModelForm):
-    class Meta:
-        model = MenuItem
-        fields = ['price']
