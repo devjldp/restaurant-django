@@ -1,24 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
-        </div>
-        <div class="col-md-6">
-            <h2 class="text-center">{{ item.name }}</h1>
-            <p>{{ item.description }}</p>
-            <p class="h3 text-success text-center"><span class="text-primary">Price: </span>£{{ item.price }}</p>
-            <ul class="text-center">
-                {% for ingredient in ingredients %}
-                    <li class="list-group-item">{{ingredient.name}}</li>
-                {% endfor %}
-            </ul>
-            <div class="text-center">
-                <a href="{% url 'menu:menu_list' %}" class="btn btn-secondary">← Go back menu</a>
+    <h2 class="text-center body-main-heading mt-5">{{ item.name|capfirst }}</h1>
+    <div class="container my-5">
+        <div class="row align-items-center">
+            <!-- <div class="col-md-6">
+                <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
+            </div> -->
+
+                                            <article class="col-sm-12 col-md-6 col-lg-4  mb-4">
+                                    <div class="card h-100 d-flex flex-column border-0 shadow-sm">
+                                        <!-- Background image section -->
+                                        <div class="menu-image-container d-flex align-items-center justify-content-center position-relative" 
+                                            style="background-image: url('{{ item.image.url }}'); 
+                                                    background-size: cover; 
+                                                    background-position: center; 
+                                                    background-repeat: no-repeat;
+                                                    height: 250px;
+                                                    border-radius: 15px 15px 0 0;">
+                                        </div>
+
+                                    </div>
+                                </article>
+
+
+
+            <div class="col-md-6 mt-5 mt-md-0 ml-md-4">
+                <p class="body-paragraph mx-auto text-start" style="width: fit-content;">{{ item.description }}.</p>
+                <p class="h3 text-success text-center"><span class="text-primary">Price: </span>£{{ item.price }}</p>
+                <p class="body-paragraph text-center mt-md-4">List of ingredients:</p>
+                <ul class="mx-auto text-start" style="width: fit-content;">
+                    {% for ingredient in ingredients %}
+                        <li class="list-group-item">{{ingredient.name}}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
-</div>
+    <div class="text-center">
+        <a href="{% url 'menu:menu_list' %}" class="btn btn-secondary mb-4">← Go back menu</a>
+    </div>
+
 {% endblock %}
