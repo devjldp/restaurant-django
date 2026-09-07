@@ -66,12 +66,13 @@
             <label for="{{ form.ingredients.id_for_label }}" class="form-label me-4 form-label-fixed"> {{ form.image.label }}  </label><br> 
             {{ form.image }} 
         </div>
-        <div class="text-center">
+        <div class="text-center my-5">
             <button type="submit" class="btn">Add a new dish</button>
+            <a href="{%url 'management:list_dishes' %}" class="btn">Dish List</a>
         </div>
     </form>
 
-    <a href="{%url 'management:home' %}">Go back dashboard</a>
+    
 
 {% endblock %}
 
