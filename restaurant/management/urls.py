@@ -16,5 +16,5 @@ urlpatterns = [
     path('dashboard/delete_dish/<int:dish_id>/', views.management_delete_dish, name = 'delete_dish'),
     path('dashboard/update_dish/<int:dish_id>/',views.management_update_dish, name='update_dish'),
     path('dashboard/reservations/',views.management_display_reservations, name='list_reservations'),
-    
+    path('dashboard/reservations/complete/<int:reservation_id>', views.management_complete_reservation, name='complete_reservation'),
 ]

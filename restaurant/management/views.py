@@ -158,3 +158,27 @@ def management_display_reservations(request):
     }
 
     return render(request, 'dashboard_reservations.html', context)
+
+@login_required
+def management_complete_reservation(request,reservation_id):
+    """
+    Mark a reservation as completed.
+
+    Args:
+        request: HTTP request.
+        reservation_id: ID of the reservation to complete.
+
+    Returns:
+        Redirects to the reservations list after updating the status.
+    """
+    try:
+        reservation = get_object_or_404(Booking, id=reservation_id)
+        reservation.status = 'completed'
+        reservation.save()
+        messages.success( request, f"Reservation with ID {reservation_id} was successfully completed.")
+
+    except Exception as e:
+        print(f"There is an error completing the reservation: {e}")
+        mesage.error(reuqest, "There was an error completing the reservation")
+    
+    return redirect('management:list_reservations')

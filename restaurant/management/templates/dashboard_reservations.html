@@ -13,7 +13,7 @@
                     <th colspan="2">Date | time</th>
                     <th>Number of guests booked </th>
                     <th>Status</th>
-                    <th colspan="2" class="text-center">Actions</th>
+                    <th colspan="3" class="text-center">Actions</th>
                 </tr>
             </thead>
 
@@ -26,7 +26,13 @@
                     <td>{{ reservation.number_of_guests }}</td>
                     <td>{{ reservation.status }}</td>
                     <td class="text-center"><a href="#">Update</a></td>
-                    <td class="text-center"><a href="#">Delete</a></td>
+                    {% if reservation.status != "completed" and reservation.status != "cancelled" %}
+                        <td class="text-center"><a href="{% url 'management:complete_reservation' reservation.id %}">Complete</a></td>
+                        <td class="text-center"><a href="#">Cancell</a></td>
+                    {% else %}
+                        <td class="text-center"><span class="text-muted">Complete</span></td>
+                        <td class="text-center"><span class="text-muted">Cancell</span></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
