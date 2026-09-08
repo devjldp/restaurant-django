@@ -17,4 +17,5 @@ urlpatterns = [
     path('dashboard/update_dish/<int:dish_id>/',views.management_update_dish, name='update_dish'),
     path('dashboard/reservations/',views.management_display_reservations, name='list_reservations'),
     path('dashboard/reservations/complete/<int:reservation_id>', views.management_complete_reservation, name='complete_reservation'),
+    path('dashboard/reservations/cancell/<int:reservation_id>', views.management_cancell_reservation, name='cancell_reservation'),
 ]

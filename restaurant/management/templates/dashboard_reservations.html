@@ -28,7 +28,7 @@
                     <td class="text-center"><a href="#">Update</a></td>
                     {% if reservation.status != "completed" and reservation.status != "cancelled" %}
                         <td class="text-center"><a href="{% url 'management:complete_reservation' reservation.id %}">Complete</a></td>
-                        <td class="text-center"><a href="#">Cancell</a></td>
+                        <td class="text-center"><a href="{% url 'management:cancell_reservation' reservation.id %}">Cancell</a></td>
                     {% else %}
                         <td class="text-center"><span class="text-muted">Complete</span></td>
                         <td class="text-center"><span class="text-muted">Cancell</span></td>
