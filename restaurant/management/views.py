@@ -11,6 +11,7 @@ from bookings.models import Booking
 
 # import forms from menu app
 from menu.forms import MenuItemForm
+from bookings.forms import BookingForm, UpdateBookingForm
 
 # Create your views here.
 @login_required
@@ -206,3 +207,43 @@ def management_cancell_reservation(request,reservation_id):
         mesage.error(reuqest, "There was an error completing the reservation")
     
     return redirect('management:list_reservations')
+
+@login_required
+def management_update_reservation(request, reservation_id):
+    """ 
+    Update an existing reservation from the management dashboard. Retrieves the reservation identified by reservation_id and displays it 
+    in an UpdateBookingForm. 
+    If the request is a POST request, the submitted form is validated and, if valid, the reservation is updated. 
+    
+    Args: 
+        request (HttpRequest): The HTTP request sent by the user. 
+        reservation_id (int): The ID of the reservation to update. 
+    
+    Returns: 
+        HttpResponse: 
+            - Redirects to the reservation list after a successful update. 
+            - Renders the update reservation template with the form and reservation if the request is GET or the form is invalid. 
+            
+    Raises: 
+        Http404: If no reservation exists with the given reservation_id. 
+    """
+    
+    reservation = get_object_or_404(Booking, id=reservation_id)
+
+    if request.method == 'POST':
+        form = UpdateBookingForm(request.POST, instance=reservation)
+        # check if your form is valid
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, "Reservation was successfully updated")
+                return redirect('management:list_reservations')
+            except Exception as e:
+                print(f"There is an error updating the dish: {e}")
+                messages.error(request, f"There was an error updating the reservation with ID {reservation_id}")
+        else:
+            messages.warning(request, "Please correct the mistakes you have in the form.")
+    else:
+        form = UpdateBookingForm(instance=reservation)
+    
+    return render(request, 'dashboard_update_reservation.html', {'form':form, 'reservation':reservation})    

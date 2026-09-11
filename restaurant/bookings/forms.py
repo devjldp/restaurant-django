@@ -48,3 +48,35 @@ class BookingForm(forms.ModelForm):
                 'placeholder': 'Any dietary requirements or special occasions?'
             }),
         }
+
+class UpdateBookingForm(forms.ModelForm):
+    """
+    Form used by managers to update an existing reservation.
+    """
+
+    class Meta:
+        model = Booking
+        fields = [
+            'booking_date',
+            'booking_time',
+            'number_of_guests',
+            'status'
+        ]
+
+        widgets = {
+            'booking_date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date', # Renders a calendar picker in the browser
+                'min': date.today().isoformat() # Prevents booking in the past
+            }),
+            'booking_time': forms.TimeInput(attrs={
+                'class': 'form-control',
+                'type': 'time', # Renders a time picker in the browser
+            }),
+            'number_of_guests': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 1,
+                'max': 12,
+            }),
+
+        }
